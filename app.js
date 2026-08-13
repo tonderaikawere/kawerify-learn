@@ -431,3 +431,25 @@ window.selectTemplate = function(index) {
   appState.generatorTemplateIdx = index;
   renderGenerator();
 }
+
+window.compileGeneratedCode = function() {
+  const langKey = appState.generatorLang;
+  const templatesList = window.templates[langKey];
+  const activeTemp = templatesList[appState.generatorTemplateIdx];
+  if (!activeTemp) return;
+  
+  const params = {};
+  if (activeTemp.params) {
+    activeTemp.params.forEach(param => {
+      const el = document.getElementById(`param-${param.id}`);
+      if (el) {
+        params[param.id] = el.value;
+      } else {
+        params[param.id] = param.default;
+      }
+    });
+  }
+  
+  const code = activeTemp.compile(params);
+  DOM.genCodeTarget.innerText = code;
+}
