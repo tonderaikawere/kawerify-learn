@@ -426,3 +426,8 @@ function renderGenerator() {
   
   compileGeneratedCode();
 }
+
+window.selectTemplate = function(index) {
+  appState.generatorTemplateIdx = index;
+  renderGenerator();
+}
