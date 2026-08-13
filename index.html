@@ -94,6 +94,36 @@
             </div>
           </div>
         </div>
+        <div class="tab-content" id="tab-licenses">
+          <div style="margin-bottom: 20px;">
+            <input type="text" id="license-search-input" placeholder="Search licenses..." style="padding:10px; font-family:var(--font-sans); border-radius:var(--border-radius); border:1px solid var(--border-color); background:var(--bg-panel); color:var(--text-active); width:100%;">
+          </div>
+          <div class="license-grid">
+            <div class="license-list" id="license-list-target"></div>
+            <div>
+              <div class="code-output-container">
+                <div class="code-header">
+                  <span class="code-title" id="license-name-title">LICENSE.txt</span>
+                  <button class="btn-action" id="license-btn-copy">📋 Copy License</button>
+                </div>
+                <pre class="code-pre" id="license-text-target" style="color:var(--text-active); font-size:0.85rem; height:350px; overflow-y:auto;"></pre>
+              </div>
+              <div class="license-builder">
+                <h3 style="margin-top:0;">License Customizer</h3>
+                <div style="display:grid; grid-template-columns:1fr 1fr; gap:15px;">
+                  <div class="input-field">
+                    <label>Copyright Year</label>
+                    <input type="text" id="license-year-input" value="2026">
+                  </div>
+                  <div class="input-field">
+                    <label>Copyright Owner</label>
+                    <input type="text" id="license-owner-input" value="Kawerify Tech (kawerifytech.com)">
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
   </div>
 </body>
 </html>
