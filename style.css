@@ -320,3 +320,9 @@ body.kid-mode .nav-item.active {
   min-height: 120px;
   font-size: 0.9rem;
 }
+.terminal-line {
+  margin-bottom: 5px;
+}
+.terminal-input {
+  color: #38bdf8;
+}
