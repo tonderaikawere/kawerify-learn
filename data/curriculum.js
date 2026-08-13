@@ -194,3 +194,43 @@ const curriculum = {
             }
         ]
     },
+    html_css: {
+        title: "HTML & CSS",
+        mascot: "Blocky the Beaver",
+        mascotEmoji: "🦫",
+        color: "var(--accent-orange)",
+        lessons: [
+            {
+                title: "HTML Skeleton",
+                kid: "HTML is like building the bones of a house! It puts up the wooden beams. You write tags like `<h1>` for big headers, and `<p>` for paragraphs to tell the computer what items are on the page.",
+                dev: "HTML (HyperText Markup Language) defines the semantic structure of a web document. It uses tags to declare text blocks, headings, interactive elements, links, and layout sections."
+            },
+            {
+                title: "CSS Paint & Style",
+                kid: "CSS is the paint, curtains, and decorations! Once Blocky builds the house, CSS paints the walls blue, sets the font size, and makes the buttons look shiny and round.",
+                dev: "CSS (Cascading Style Sheets) is a stylesheet language used to describe the presentation and styling of a document. It handles colors, typography, spacing, borders, and effects."
+            },
+            {
+                title: "Flexbox Layouts",
+                kid: "Flexbox is like a magical row builder. You put all your toys in a box, and Flexbox lines them up side-by-side or stacks them neatly, spacing them out evenly automatically!",
+                dev: "CSS Flexbox layout provides an efficient way to lay out, align, and distribute space among items in a container, even when their size is dynamic or unknown."
+            }
+        ],
+        quizzes: [
+            {
+                q: "Which tag is used for the largest heading?",
+                a: ["<h6>", "<h-big>", "<h1>"],
+                correct: 2,
+                kidFeedback: "Great job! h1 is the biggest header bones of all!",
+                devFeedback: "Correct. `<h1>` is the top-level HTML semantic heading tag."
+            },
+            {
+                q: "What property turns on the flexbox layout?",
+                a: ["display: flex", "flex: true", "layout: flexbox"],
+                correct: 0,
+                kidFeedback: "Perfect! display: flex tells CSS to line up toys neatly!",
+                devFeedback: "Correct. Setting `display: flex` establishes a flex formatting context for its children."
+            }
+        ]
+    }
+};
