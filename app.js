@@ -471,3 +471,9 @@ function copyToClipboard(text) {
     setTimeout(() => popup.remove(), 2000);
   });
 }
+
+function sendToPlayground() {
+  const code = DOM.genCodeTarget.innerText;
+  DOM.playCodeEditor.value = code;
+  switchTab("playground");
+}
