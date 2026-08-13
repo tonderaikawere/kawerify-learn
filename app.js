@@ -633,3 +633,23 @@ function simulateTerminal(lang, code) {
   }
   printNextLine();
 }
+
+function downloadCodeFile() {
+  const code = DOM.playCodeEditor.value;
+  const blob = new Blob([code], { type: "text/plain;charset=utf-8" });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.href = url;
+  
+  // Decide extension
+  let ext = "js";
+  if (code.includes("import React")) ext = "jsx";
+  else if (code.includes("import random")) ext = "py";
+  else if (code.includes("stdio.h")) ext = "c";
+  else if (code.includes("<?php")) ext = "php";
+  else if (code.includes("<html>")) ext = "html";
+  
+  a.download = `kawerify_learn_code.${ext}`;
+  a.click();
+  URL.revokeObjectURL(url);
+}
