@@ -286,3 +286,55 @@ window.toggleLessonComplete = function(lang, index) {
   saveToLocalStorage();
   renderCurriculum();
 }
+
+let activeQuizAnswers = {};
+
+function renderQuiz() {
+  const langKey = appState.curriculumLang;
+  const lang = window.curriculum[langKey];
+  const qTarget = document.getElementById("quiz-container-target");
+  if (!lang || !qTarget) return;
+  
+  let html = "";
+  lang.quizzes.forEach((quiz, qIdx) => {
+    const answeredIdx = activeQuizAnswers[`${langKey}_${qIdx}`];
+    const isCorrect = answeredIdx === quiz.correct;
+    
+    html += `
+      <div style="margin-bottom: 20px; border-bottom:1px solid var(--border-color); padding-bottom:15px;">
+        <p style="font-weight:bold; font-size:1.05rem;">Question ${qIdx + 1}: ${quiz.q}</p>
+        <div class="quiz-options">
+    `;
+    
+    quiz.a.forEach((opt, oIdx) => {
+      let extraStyle = "";
+      if (answeredIdx !== undefined) {
+        if (oIdx === quiz.correct) {
+          extraStyle = "background-color:rgba(16, 185, 129, 0.2); border-color:var(--accent-green);";
+        } else if (oIdx === answeredIdx) {
+          extraStyle = "background-color:rgba(239, 68, 68, 0.2); border-color:#ef4444;";
+        }
+      }
+      
+      html += `
+        <button class="option-btn" style="${extraStyle}" onclick="answerQuiz('${langKey}', ${qIdx}, ${oIdx})" ${answeredIdx !== undefined ? 'disabled' : ''}>
+          ${opt}
+        </button>
+      `;
+    });
+    
+    html += `</div>`;
+    
+    if (answeredIdx !== undefined) {
+      html += `
+        <div style="margin-top:10px; font-weight:500; color:${isCorrect ? 'var(--accent-green)' : '#ef4444'}">
+          ${isCorrect ? '🎉 Correct! ' + (appState.mode === 'kid' ? quiz.kidFeedback : quiz.devFeedback) : '❌ Try again next time!'}
+        </div>
+      `;
+    }
+    
+    html += `</div>`;
+  });
+  
+  qTarget.innerHTML = html;
+}
