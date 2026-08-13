@@ -299,3 +299,24 @@ body.kid-mode .nav-item.active {
 .btn-action:hover {
   opacity: 0.9;
 }
+.terminal-container {
+  margin-top: 20px;
+  background-color: #05050a;
+  border-radius: var(--border-radius);
+  border: 1px solid #334155;
+  font-family: var(--font-mono);
+  color: #22c55e;
+  overflow: hidden;
+}
+.terminal-header {
+  background-color: #1e293b;
+  color: #f8fafc;
+  padding: 8px 15px;
+  font-size: 0.85rem;
+  font-weight: bold;
+}
+.terminal-body {
+  padding: 15px;
+  min-height: 120px;
+  font-size: 0.9rem;
+}
