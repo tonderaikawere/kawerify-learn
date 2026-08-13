@@ -274,3 +274,15 @@ function renderCurriculum() {
   DOM.currViewTarget.innerHTML = html;
   renderQuiz();
 }
+
+window.toggleLessonComplete = function(lang, index) {
+  const key = `${lang}_${index}`;
+  if (appState.completedLessons[key]) {
+    delete appState.completedLessons[key];
+  } else {
+    appState.completedLessons[key] = true;
+    triggerConfetti();
+  }
+  saveToLocalStorage();
+  renderCurriculum();
+}
