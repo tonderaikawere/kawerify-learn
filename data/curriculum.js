@@ -155,3 +155,42 @@ const curriculum = {
             }
         ]
     },
+    javascript: {
+        title: "JavaScript Language",
+        mascot: "Sparky the Squirrel",
+        mascotEmoji: "🐿️",
+        color: "var(--accent-teal)",
+        lessons: [
+            {
+                title: "Triggers & Actions",
+                kid: "JavaScript is like light switches! HTML builds the bulb, but JS is the switch. When a user clicks a button, JS jumps to action, runs code, and turns on the light!",
+                dev: "JavaScript is an event-driven, single-threaded programming language. It adds dynamic, interactive behavior to web pages by reacting to user inputs and modifying document elements."
+            },
+            {
+                title: "The DOM Tree",
+                kid: "Think of your web page as a giant tree with branches (titles, pictures, lists). JavaScript is like a squirrel that climbs the branches and changes them, like changing a title from blue to green!",
+                dev: "The Document Object Model (DOM) is a programming interface for web documents. It represents the page structure as a tree nodes, which JavaScript can query, manipulate, and restructure."
+            },
+            {
+                title: "Events (Listening)",
+                kid: "JavaScript acts like a listener. It sits quietly until it hears a mouse click (`click`), a keyboard tap (`keyup`), or a screen scroll. When it hears them, it runs the code you wrote!",
+                dev: "Events are signals sent by the browser. JavaScript attaches event listeners to target DOM elements using `addEventListener()`, executing callback functions when events are fired."
+            }
+        ],
+        quizzes: [
+            {
+                q: "What does JavaScript manipulate on a page?",
+                a: ["The URL domain registry", "The DOM tree structure", "The hardware graphics processor"],
+                correct: 1,
+                kidFeedback: "Hooray! JavaScript climbs the DOM tree to change layout elements!",
+                devFeedback: "Correct. The DOM tree is the primary API used by browser JavaScript to manipulate layouts."
+            },
+            {
+                q: "How do you listen for user clicks?",
+                a: ["element.addEventListener('click', callback)", "element.listen('click')", "element.onClick()"],
+                correct: 0,
+                kidFeedback: "Bingo! addEventListener is how Sparky listens for mouse clicks!",
+                devFeedback: "Correct. `addEventListener('click', ...)` registers an event listener on the target node."
+            }
+        ]
+    },
