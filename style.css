@@ -452,3 +452,6 @@ body.kid-mode .btn-action {
 .progress-glow { box-shadow: 0 0 10px var(--accent-green); }
 
 #playground-btn-export { border-radius: 4px; }
+
+/* Sleek console prompt enhancements */
+.terminal-line span { font-weight: bold; }
