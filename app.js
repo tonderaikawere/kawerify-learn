@@ -811,3 +811,4 @@ const mascotSVGs = {};
 mascotSVGs.python = `<svg width='50' height='50' viewBox='0 0 100 100'></svg>`;
 mascotSVGs.c = `<svg width='50' height='50' viewBox='0 0 100 100'></svg>`;
 mascotSVGs.php = `<svg width='50' height='50' viewBox='0 0 100 100'></svg>`;
+mascotSVGs.javascript = `<svg width='50' height='50' viewBox='0 0 100 100'></svg>`;
