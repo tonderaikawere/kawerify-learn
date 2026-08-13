@@ -450,3 +450,5 @@ body.kid-mode .btn-action {
 
 /* High-contrast active progress indicators */
 .progress-glow { box-shadow: 0 0 10px var(--accent-green); }
+
+#playground-btn-export { border-radius: 4px; }
