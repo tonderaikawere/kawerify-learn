@@ -400,3 +400,14 @@ body.kid-mode .nav-item.active {
 .legal-container h1, .legal-container h2 {
   color: var(--accent-blue);
 }
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: var(--bg-active);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--border-color);
+  border-radius: 4px;
+}
