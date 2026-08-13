@@ -40,3 +40,12 @@ body.dev-mode {
 body.kid-mode {
   --border-radius: var(--border-radius-kid);
 }
+body {
+  margin: 0;
+  padding: 0;
+  background-color: var(--bg-active);
+  color: var(--text-active);
+  font-family: var(--font-sans);
+  transition: all 0.3s ease;
+  overflow-x: hidden;
+}
