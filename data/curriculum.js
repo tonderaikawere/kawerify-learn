@@ -256,3 +256,4 @@ if (typeof window !== 'undefined') { window.curriculum = curriculum; }
 // Curriculum revision step 41 for html_css
 // Curriculum revision step 42 for react
 // Curriculum revision step 43 for python
+// Curriculum revision step 44 for c
