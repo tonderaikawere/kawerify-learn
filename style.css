@@ -165,3 +165,22 @@ body.kid-mode .nav-item.active {
   margin-top: 15px;
   line-height: 1.6;
 }
+.mascot-banner {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding: 15px;
+  background: linear-gradient(135deg, var(--bg-panel), var(--bg-active));
+  border-radius: var(--border-radius);
+  margin-bottom: 20px;
+  border: 2px solid var(--border-color);
+}
+.mascot-avatar {
+  font-size: 3rem;
+  animation: float 3s ease-in-out infinite;
+}
+@keyframes float {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-8px); }
+  100% { transform: translateY(0px); }
+}
