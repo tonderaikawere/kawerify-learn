@@ -224,3 +224,33 @@ body.kid-mode .nav-item.active {
   border-radius: 20px;
   font-weight: 700;
 }
+.generator-grid {
+  display: grid;
+  grid-template-columns: 350px 1fr;
+  gap: 30px;
+}
+.generator-options {
+  background-color: var(--bg-panel);
+  border: 2px solid var(--border-color);
+  border-radius: var(--border-radius);
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+.input-field {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+.input-field label {
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+.input-field input, .input-field select {
+  padding: 10px;
+  background-color: var(--bg-active);
+  border: 1px solid var(--border-color);
+  color: var(--text-active);
+  border-radius: var(--border-radius);
+}
