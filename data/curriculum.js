@@ -234,3 +234,6 @@ const curriculum = {
         ]
     }
 };
+
+if (typeof window !== 'undefined') { window.curriculum = curriculum; }
+// Curriculum revision step 24 for react
