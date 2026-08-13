@@ -764,3 +764,28 @@ function resetProgress() {
 function saveToLocalStorage() {
   localStorage.setItem("kawerify_learn_state", JSON.stringify(appState));
 }
+
+function loadFromLocalStorage() {
+  const saved = localStorage.getItem("kawerify_learn_state");
+  if (saved) {
+    try {
+      const parsed = JSON.parse(saved);
+      Object.assign(appState, parsed);
+      
+      // Re-apply classes
+      if (appState.theme === "light") {
+        document.body.classList.remove("dark-theme");
+        document.body.classList.add("light-theme");
+        if (DOM.themeToggle) DOM.themeToggle.innerText = "🌙 Dark Mode";
+      }
+      if (appState.mode === "kid") {
+        document.body.classList.remove("dev-mode");
+        document.body.classList.add("kid-mode");
+        if (DOM.kidToggle) DOM.kidToggle.innerText = "👨‍💻 Dev Mode";
+      }
+      
+    } catch(e) {
+      console.error("Error reading saved settings data", e);
+    }
+  }
+}
