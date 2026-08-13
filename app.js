@@ -197,3 +197,80 @@ function toggleKidMode() {
   renderCurriculum();
   saveToLocalStorage();
 }
+
+function renderCurriculum() {
+  const langKey = appState.curriculumLang;
+  const lang = window.curriculum[langKey];
+  if (!lang) return;
+  
+  const searchVal = DOM.lessonSearchInput.value.toLowerCase();
+  
+  let html = `
+    <div class="mascot-banner">
+      <div class="mascot-avatar">${lang.mascotEmoji}</div>
+      <div>
+        <h2 style="margin:0; color:${lang.color}">${lang.title} Lesson Space</h2>
+        <p style="margin:5px 0 0 0; color:var(--text-muted);">Hi! I'm <strong>${lang.mascot}</strong>, and I will help you learn today!</p>
+      </div>
+    </div>
+  `;
+  
+  // Progress Bar
+  const totalLessons = lang.lessons.length;
+  let completed = 0;
+  for(let i=0; i<totalLessons; i++) {
+    if (appState.completedLessons[`${langKey}_${i}`]) completed++;
+  }
+  const percent = totalLessons > 0 ? Math.round((completed / totalLessons) * 100) : 0;
+  html += `
+    <div style="background-color:var(--bg-panel); border:2px solid var(--border-color); border-radius:var(--border-radius); padding:10px 15px; margin-bottom:20px;">
+      <div style="display:flex; justify-content:space-between; margin-bottom:5px; font-weight:bold; font-size:0.9rem;">
+        <span>Progress Tracker</span>
+        <span>${percent}% Completed (${completed}/${totalLessons})</span>
+      </div>
+      <div style="background:#475569; height:12px; border-radius:10px; overflow:hidden;">
+        <div style="background:var(--accent-green); height:100%; width:${percent}%; transition:width 0.3s ease;"></div>
+      </div>
+    </div>
+  `;
+  
+  // Lessons
+  let renderedLessonsCount = 0;
+  lang.lessons.forEach((lesson, index) => {
+    if (searchVal && !lesson.title.toLowerCase().includes(searchVal) && !lesson.kid.toLowerCase().includes(searchVal) && !lesson.dev.toLowerCase().includes(searchVal)) {
+      return;
+    }
+    renderedLessonsCount++;
+    const isCompleted = appState.completedLessons[`${langKey}_${index}`];
+    
+    html += `
+      <div class="lesson-card">
+        <div style="display:flex; justify-content:space-between; align-items:center;">
+          <h3 class="lesson-title" style="color:${lang.color}">${index + 1}. ${lesson.title}</h3>
+          <button class="btn-action" style="padding:4px 8px; font-size:0.75rem; background-color:${isCompleted ? 'var(--accent-green)' : '#64748b'}" onclick="toggleLessonComplete('${langKey}', ${index})">
+            ${isCompleted ? '✅ Finished' : '📖 Mark Read'}
+          </button>
+        </div>
+        <div class="explanation-box">
+          <p><strong>${appState.mode === 'kid' ? '🧒 Simple analogy:' : '👨‍💻 Detailed definition:'}</strong></p>
+          <p style="font-size:1.05rem;">${appState.mode === 'kid' ? lesson.kid : lesson.dev}</p>
+        </div>
+      </div>
+    `;
+  });
+  
+  if (renderedLessonsCount === 0) {
+    html += `<p style="text-align:center; color:var(--text-muted);">No lessons matched your search.</p>`;
+  }
+  
+  // Quiz
+  html += `
+    <div class="quiz-section">
+      <h3 style="margin-top:0; color:var(--accent-yellow)">📝 Quiz Challenge</h3>
+      <div id="quiz-container-target"></div>
+    </div>
+  `;
+  
+  DOM.currViewTarget.innerHTML = html;
+  renderQuiz();
+}
