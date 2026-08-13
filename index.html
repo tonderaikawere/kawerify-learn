@@ -43,6 +43,33 @@
           </div>
           <div id="curriculum-view-target"></div>
         </div>
+        <div class="tab-content" id="tab-generator">
+          <div style="margin-bottom: 20px;">
+            <select id="generator-lang-select" style="padding:10px; font-family:var(--font-sans); border-radius:var(--border-radius); border:1px solid var(--border-color); background:var(--bg-panel); color:var(--text-active);">
+              <option value="react">React Templates</option>
+              <option value="python">Python Templates</option>
+              <option value="c">C Templates</option>
+              <option value="php">PHP Templates</option>
+              <option value="javascript">JavaScript Templates</option>
+              <option value="html_css">HTML/CSS Templates</option>
+            </select>
+          </div>
+          <div class="generator-grid">
+            <div class="generator-options" id="generator-opts-target"></div>
+            <div class="generator-code-view">
+              <div class="code-output-container">
+                <div class="code-header">
+                  <span class="code-title" id="generator-code-filename">code.js</span>
+                  <div style="display:flex; gap:10px;">
+                    <button class="btn-action" id="generator-btn-copy">📋 Copy Code</button>
+                    <button class="btn-action" id="generator-btn-playground" style="background-color:var(--accent-green)">🛝 Send to Playground</button>
+                  </div>
+                </div>
+                <pre class="code-pre" id="generator-code-target">Select variables to compile template...</pre>
+              </div>
+            </div>
+          </div>
+        </div>
   </div>
 </body>
 </html>
