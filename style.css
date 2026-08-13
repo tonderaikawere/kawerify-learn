@@ -254,3 +254,33 @@ body.kid-mode .nav-item.active {
   color: var(--text-active);
   border-radius: var(--border-radius);
 }
+.code-output-container {
+  display: flex;
+  flex-direction: column;
+  background-color: #0b0f19;
+  border-radius: var(--border-radius);
+  overflow: hidden;
+  border: 1px solid #1e293b;
+}
+.code-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 15px;
+  background-color: #111827;
+  border-bottom: 1px solid #1e293b;
+}
+.code-title {
+  color: #94a3b8;
+  font-size: 0.9rem;
+  font-family: var(--font-mono);
+}
+.code-pre {
+  margin: 0;
+  padding: 20px;
+  overflow: auto;
+  font-family: var(--font-mono);
+  color: #38bdf8;
+  font-size: 0.95rem;
+  white-space: pre-wrap;
+}
