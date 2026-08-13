@@ -455,3 +455,5 @@ body.kid-mode .btn-action {
 
 /* Sleek console prompt enhancements */
 .terminal-line span { font-weight: bold; }
+
+#system-alert-banner { background: #1e293b; color: white; padding: 12px; border-radius: 6px; border: 1px solid var(--accent-blue); }
