@@ -693,3 +693,9 @@ function renderLicenseList() {
   
   target.innerHTML = html;
 }
+
+window.selectLicense = function(id) {
+  appState.activeLicense = id;
+  renderLicenseList();
+  renderLicenseText();
+}
