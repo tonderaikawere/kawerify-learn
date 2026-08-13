@@ -1,0 +1,42 @@
+/* Google Fonts and CSS Variables Setup */
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap');
+:root {
+  --bg-dark: #0f172a;
+  --bg-card-dark: #1e293b;
+  --bg-light: #f8fafc;
+  --bg-card-light: #ffffff;
+  --text-dark: #f8fafc;
+  --text-light: #0f172a;
+  --text-muted-dark: #94a3b8;
+  --text-muted-light: #64748b;
+  --accent-blue: #0ea5e9;
+  --accent-green: #10b981;
+  --accent-yellow: #f59e0b;
+  --accent-purple: #8b5cf6;
+  --accent-teal: #14b8a6;
+  --accent-orange: #f97316;
+  --border-radius-dev: 6px;
+  --border-radius-kid: 16px;
+  --font-sans: 'Outfit', sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+}
+body.dark-theme {
+  --bg-active: var(--bg-dark);
+  --bg-panel: var(--bg-card-dark);
+  --text-active: var(--text-dark);
+  --text-muted: var(--text-muted-dark);
+  --border-color: #334155;
+}
+body.light-theme {
+  --bg-active: var(--bg-light);
+  --bg-panel: var(--bg-card-light);
+  --text-active: var(--text-light);
+  --text-muted: var(--text-muted-light);
+  --border-color: #e2e8f0;
+}
+body.dev-mode {
+  --border-radius: var(--border-radius-dev);
+}
+body.kid-mode {
+  --border-radius: var(--border-radius-kid);
+}
