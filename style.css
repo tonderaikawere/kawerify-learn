@@ -49,3 +49,27 @@ body {
   transition: all 0.3s ease;
   overflow-x: hidden;
 }
+.app-container {
+  display: grid;
+  grid-template-rows: 70px 1fr 50px;
+  min-height: 100vh;
+}
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 20px;
+  background-color: var(--bg-panel);
+  border-bottom: 2px solid var(--border-color);
+}
+.logo-container {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.logo-text {
+  font-weight: 800;
+  font-size: 1.5rem;
+  letter-spacing: -0.5px;
+  color: var(--accent-blue);
+}
