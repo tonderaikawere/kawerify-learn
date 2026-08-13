@@ -349,3 +349,31 @@ window.answerQuiz = function(langKey, qIdx, oIdx) {
   }
   renderQuiz();
 }
+
+function triggerConfetti() {
+  // Create quick visual animation bubble
+  const box = document.createElement("div");
+  box.style.position = "fixed";
+  box.style.top = "50%";
+  box.style.left = "50%";
+  box.style.transform = "translate(-50%, -50%)";
+  box.style.fontSize = "5rem";
+  box.style.pointerEvents = "none";
+  box.style.zIndex = "9999";
+  box.innerText = "🎉✨🥳";
+  box.style.animation = "float-away 1.5s forwards";
+  
+  const styleEl = document.createElement("style");
+  styleEl.innerHTML = `
+    @keyframes float-away {
+      0% { opacity: 1; transform: translate(-50%, -50%) scale(0.5); }
+      100% { opacity: 0; transform: translate(-50%, -80%) scale(1.5); }
+    }
+  `;
+  document.head.appendChild(styleEl);
+  document.body.appendChild(box);
+  setTimeout(() => {
+    box.remove();
+    styleEl.remove();
+  }, 1500);
+}
