@@ -326,3 +326,22 @@ body.kid-mode .nav-item.active {
 .terminal-input {
   color: #38bdf8;
 }
+.playground-split {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  height: 500px;
+}
+.playground-editor {
+  width: 100%;
+  height: 100%;
+  padding: 15px;
+  background-color: #0d1117;
+  color: #c9d1d9;
+  font-family: var(--font-mono);
+  font-size: 0.95rem;
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius);
+  resize: none;
+  box-sizing: border-box;
+}
