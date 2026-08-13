@@ -235,4 +235,66 @@ if (password_verify("Kawerify123!", $hashedPassword)) {
 ?>`
         }
     ],
+    javascript: [
+        {
+            name: "Interactive Alert Button",
+            description: "Adds a click listener showing styled notifications.",
+            params: [
+                { name: "Alert Text", id: "alertTxt", type: "text", default: "Sparky is excited!" }
+            ],
+            compile: (p) => `// JavaScript code
+const btn = document.querySelector("#my-btn");
+btn.addEventListener("click", () => {
+    alert("${p.alertTxt}");
+});`
+        }
+    ],
+    html_css: [
+        {
+            name: "Hero Landing Banner",
+            description: "Clean responsive layout banner using CSS flexbox.",
+            params: [
+                { name: "Banner Text", id: "bannerText", type: "text", default: "Learn Code Free!" },
+                { name: "Theme Color", id: "themeCol", type: "color", default: "#10b981" }
+            ],
+            compile: (p) => `<!-- HTML -->
+<div class="banner">
+    <h1>${p.bannerText}</h1>
+    <button id="my-btn">Get Started</button>
+</div>
+
+<!-- CSS -->
+<style>
+.banner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    background-color: #0f172a;
+    color: white;
+    font-family: 'Outfit', sans-serif;
+    border: 3px solid ${p.themeCol};
+    border-radius: 10px;
+}
+h1 {
+    color: ${p.themeCol};
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+}
+button {
+    background-color: ${p.themeCol};
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 0 4px 10px ${p.themeCol}88;
+}
+</style>`
+        }
+    ]
 };
+
+if (typeof window !== 'undefined') { window.templates = templates; }
