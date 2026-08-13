@@ -28,6 +28,21 @@
         <button class="nav-item" data-tab="licenses">📜 Licenses (10+)</button>
         <button class="nav-item" data-tab="legal">🛡️ Legal Docs</button>
       </aside>
+      <main class="workspace">
+        <div class="tab-content active" id="tab-learn">
+          <div style="margin-bottom: 20px; display:flex; gap:10px;">
+            <select id="curriculum-lang-select" style="padding:10px; font-family:var(--font-sans); border-radius:var(--border-radius); border:1px solid var(--border-color); background:var(--bg-panel); color:var(--text-active);">
+              <option value="react">React Library</option>
+              <option value="python">Python Language</option>
+              <option value="c">C Language</option>
+              <option value="php">PHP Language</option>
+              <option value="javascript">JavaScript Language</option>
+              <option value="html_css">HTML & CSS</option>
+            </select>
+            <input type="text" id="lesson-search-input" placeholder="Search lessons..." style="padding:10px; font-family:var(--font-sans); border-radius:var(--border-radius); border:1px solid var(--border-color); background:var(--bg-panel); color:var(--text-active); flex-grow:1;">
+          </div>
+          <div id="curriculum-view-target"></div>
+        </div>
   </div>
 </body>
 </html>
