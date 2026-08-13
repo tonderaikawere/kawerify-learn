@@ -95,3 +95,39 @@ body.kid-mode .toggle-btn {
   border: 3px solid var(--text-active);
   box-shadow: 0 4px 0 var(--text-active);
 }
+.main-body {
+  display: grid;
+  grid-template-columns: 240px 1fr;
+}
+.sidebar {
+  background-color: var(--bg-panel);
+  border-right: 2px solid var(--border-color);
+  padding: 20px 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.nav-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 15px;
+  background: none;
+  border: none;
+  color: var(--text-muted);
+  font-family: var(--font-sans);
+  font-size: 1rem;
+  font-weight: 600;
+  text-align: left;
+  border-radius: var(--border-radius);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+.nav-item.active, .nav-item:hover {
+  background-color: var(--bg-active);
+  color: var(--text-active);
+}
+body.kid-mode .nav-item.active {
+  border: 3px solid var(--text-active);
+  box-shadow: 0 4px 0 var(--text-active);
+}
