@@ -338,3 +338,14 @@ function renderQuiz() {
   
   qTarget.innerHTML = html;
 }
+
+window.answerQuiz = function(langKey, qIdx, oIdx) {
+  const lang = window.curriculum[langKey];
+  const quiz = lang.quizzes[qIdx];
+  activeQuizAnswers[`${langKey}_${qIdx}`] = oIdx;
+  
+  if (oIdx === quiz.correct) {
+    triggerConfetti();
+  }
+  renderQuiz();
+}
