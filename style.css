@@ -438,3 +438,6 @@ body.kid-mode .btn-action {
   border: 2px solid white;
   box-shadow: 0 4px 0 rgba(0,0,0,0.2);
 }
+
+/* Playground column sizing proportions adjustments */
+.playground-split { grid-template-columns: 1.2fr 0.8fr; }
