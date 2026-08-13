@@ -750,3 +750,13 @@ function renderLegalDoc() {
       target.innerHTML = "<p>Error loading legal documentation page.</p>";
     });
 }
+
+function resetProgress() {
+  if (confirm("Are you sure you want to delete all learning progress?")) {
+    appState.completedLessons = {};
+    activeQuizAnswers = {};
+    saveToLocalStorage();
+    renderCurriculum();
+    alert("Progress successfully reset!");
+  }
+}
