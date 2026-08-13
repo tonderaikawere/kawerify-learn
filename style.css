@@ -209,3 +209,18 @@ body.kid-mode .nav-item.active {
 .option-btn:hover {
   background-color: var(--border-color);
 }
+.quiz-score-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 20px;
+  padding-top: 15px;
+  border-top: 1px solid var(--border-color);
+}
+.score-badge {
+  background-color: var(--accent-green);
+  color: white;
+  padding: 5px 12px;
+  border-radius: 20px;
+  font-weight: 700;
+}
