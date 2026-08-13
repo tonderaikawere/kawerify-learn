@@ -70,6 +70,30 @@
             </div>
           </div>
         </div>
+        <div class="tab-content" id="tab-playground">
+          <div class="playground-split">
+            <div style="display:flex; flex-direction:column; gap:10px; height:100%;">
+              <div style="display:flex; justify-content:space-between; align-items:center;">
+                <span style="font-weight:bold;">Code Editor</span>
+                <div style="display:flex; gap:10px;">
+                  <button class="btn-action" id="playground-btn-download" style="background-color:#64748b;">📥 Download</button>
+                  <button class="btn-action" id="playground-btn-run">▶️ Run Code</button>
+                </div>
+              </div>
+              <textarea class="playground-editor" id="playground-code-editor" placeholder="Write HTML/CSS/JS here... (For Python/C/PHP templates, hit 'Run' to see simulated output)"></textarea>
+            </div>
+            <div style="display:flex; flex-direction:column; gap:10px; height:100%;">
+              <span style="font-weight:bold;">Console / Output</span>
+              <div class="playground-preview" style="height:100%;">
+                <iframe class="preview-iframe" id="playground-preview-frame"></div>
+              </div>
+              <div class="terminal-container" id="playground-terminal" style="display:none;">
+                <div class="terminal-header">Simulated Terminal CLI</div>
+                <div class="terminal-body" id="playground-terminal-body"></div>
+              </div>
+            </div>
+          </div>
+        </div>
   </div>
 </body>
 </html>
