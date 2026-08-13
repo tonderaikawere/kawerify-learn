@@ -653,3 +653,43 @@ function downloadCodeFile() {
   a.click();
   URL.revokeObjectURL(url);
 }
+
+const licensesList = [
+  { id: "mit", name: "MIT License", desc: "Permissive, popular open source choice." },
+  { id: "apache2", name: "Apache License 2.0", desc: "Permissive, covers patent rights transfers." },
+  { id: "gpl3", name: "GNU GPLv3", desc: "Copyleft license, mandates sharing derivative code." },
+  { id: "lgpl3", name: "GNU LGPLv3", desc: "Lesser copyleft, easier library linking rules." },
+  { id: "bsd3", name: "BSD 3-Clause", desc: "Permissive, simple BSD agreement terms." },
+  { id: "bsd2", name: "BSD 2-Clause", desc: "Permissive, eliminates advertising requirements." },
+  { id: "mpl2", name: "Mozilla Public License 2.0", desc: "Weak copyleft, file-level source isolation." },
+  { id: "epl2", name: "Eclipse Public License 2.0", desc: "Commercial-friendly copyleft layout rules." },
+  { id: "cc4", name: "Creative Commons BY 4.0", desc: "Perfect for assets, documentation sharing." },
+  { id: "unlicense", name: "The Unlicense", desc: "Relinquishes all rights into public domain." },
+  { id: "isc", name: "ISC License", desc: "Super simple permissive license agreement." }
+];
+
+function renderLicenseList() {
+  const searchVal = DOM.licSearchInput.value.toLowerCase();
+  const target = DOM.licListTarget;
+  if (!target) return;
+  
+  let html = "";
+  licensesList.forEach(lic => {
+    if (searchVal && !lic.name.toLowerCase().includes(searchVal) && !lic.desc.toLowerCase().includes(searchVal)) {
+      return;
+    }
+    
+    html += `
+      <button class="license-item-btn ${appState.activeLicense === lic.id ? 'active' : ''}" onclick="selectLicense('${lic.id}')">
+        <strong>${lic.name}</strong>
+        <div style="font-size:0.75rem; opacity:0.8; margin-top:2px;">${lic.desc}</div>
+      </button>
+    `;
+  });
+  
+  if (!html) {
+    html = `<p style="color:var(--text-muted); text-align:center;">No licenses found.</p>`;
+  }
+  
+  target.innerHTML = html;
+}
