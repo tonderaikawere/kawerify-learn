@@ -813,3 +813,8 @@ mascotSVGs.c = `<svg width='50' height='50' viewBox='0 0 100 100'></svg>`;
 mascotSVGs.php = `<svg width='50' height='50' viewBox='0 0 100 100'></svg>`;
 mascotSVGs.javascript = `<svg width='50' height='50' viewBox='0 0 100 100'></svg>`;
 mascotSVGs.html_css = `<svg width='50' height='50' viewBox='0 0 100 100'></svg>`;
+
+// Mascot SVG injector helper function
+function injectMascotSVG(langKey) {
+  return mascotSVGs[langKey] || '';
+}
