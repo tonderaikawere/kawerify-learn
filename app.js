@@ -14,3 +14,39 @@ const appState = {
   legalDoc: "privacy",
   completedLessons: {} // maps lang_lesson => boolean
 };
+
+
+const DOM = {
+  kidToggle: null,
+  themeToggle: null,
+  navBtns: [],
+  tabContents: [],
+  currLangSelect: null,
+  lessonSearchInput: null,
+  currViewTarget: null,
+  genLangSelect: null,
+  genOptsTarget: null,
+  genFileName: null,
+  genBtnCopy: null,
+  genBtnPlayground: null,
+  genCodeTarget: null,
+  playBtnDownload: null,
+  playBtnRun: null,
+  playCodeEditor: null,
+  playPreviewFrame: null,
+  playTerminal: null,
+  playTerminalBody: null,
+  licSearchInput: null,
+  licListTarget: null,
+  licNameTitle: null,
+  licBtnCopy: null,
+  licTextTarget: null,
+  licYearInput: null,
+  licOwnerInput: null,
+  legDocBtns: [],
+  legContentTarget: null,
+  resetProgressBtn: null,
+  helpBtn: null,
+  helpCard: null,
+  helpCloseBtn: null
+};
