@@ -805,3 +805,6 @@ window.addEventListener("DOMContentLoaded", () => {
   renderLicenseText();
   renderLegalDoc();
 });
+
+// Added custom SVG mascot dictionary mapping for React
+const mascotSVGs = {};
