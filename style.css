@@ -73,3 +73,25 @@ body {
   letter-spacing: -0.5px;
   color: var(--accent-blue);
 }
+.controls-group {
+  display: flex;
+  gap: 15px;
+  align-items: center;
+}
+.toggle-btn {
+  background-color: var(--bg-active);
+  border: 1px solid var(--border-color);
+  color: var(--text-active);
+  padding: 8px 16px;
+  border-radius: var(--border-radius);
+  cursor: pointer;
+  font-weight: 600;
+  transition: all 0.2s ease;
+}
+.toggle-btn:hover {
+  transform: translateY(-2px);
+}
+body.kid-mode .toggle-btn {
+  border: 3px solid var(--text-active);
+  box-shadow: 0 4px 0 var(--text-active);
+}
