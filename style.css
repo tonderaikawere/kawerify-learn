@@ -385,3 +385,10 @@ body.kid-mode .nav-item.active {
   background-color: var(--accent-blue);
   color: white;
 }
+.license-builder {
+  background-color: var(--bg-panel);
+  border-radius: var(--border-radius);
+  border: 1px solid var(--border-color);
+  padding: 20px;
+  margin-top: 20px;
+}
