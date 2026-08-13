@@ -445,3 +445,5 @@ body.kid-mode .btn-action {
 /* CSS Variables Documentation: --bg-active is the main color theme background */
 
 #lesson-search-input { outline: none; border-color: var(--accent-blue); }
+
+#help-tooltip { position:absolute; bottom:40px; right:10px; background:#1e293b; padding:10px; }
