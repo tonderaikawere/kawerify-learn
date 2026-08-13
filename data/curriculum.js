@@ -38,3 +38,42 @@ const curriculum = {
             }
         ]
     },
+    python: {
+        title: "Python Language",
+        mascot: "Penny the Python",
+        mascotEmoji: "🐍",
+        color: "var(--accent-green)",
+        lessons: [
+            {
+                title: "Variables (Labeled Boxes)",
+                kid: "Python is like a magical bedroom. A **Variable** is a box with a label! You can store a toy inside, like writing `my_box = 'Teddy Bear'`. Whenever you say `my_box`, Python brings out the Teddy Bear!",
+                dev: "Variables in Python are dynamically-typed references to objects in memory. They are created when a value is assigned to them using the `=` operator, and do not require explicit type declaration."
+            },
+            {
+                title: "Functions (Recipe Machines)",
+                kid: "A **Function** is like a magic cooking machine! You put ingredients in (inputs), the machine does a recipe, and it outputs a cake. In code, we define it like `def bake_cake(flour):`.",
+                dev: "Functions are organized, reusable blocks of code that perform a single, related action. They are defined using the `def` keyword, can accept parameters, and return values using the `return` statement."
+            },
+            {
+                title: "Loops (Rollercoasters)",
+                kid: "A **Loop** is like riding a rollercoaster over and over! If you want to say 'Hello' 5 times, you tell Python to loop 5 times using `for i in range(5):`. No need to write it 5 times!",
+                dev: "Loops allow you to execute a statement or group of statements multiple times. Python uses `for` loops to iterate over sequences (lists, dictionaries, ranges) and `while` loops for conditional iterations."
+            }
+        ],
+        quizzes: [
+            {
+                q: "How do you store a value in Python?",
+                a: ["x = 5", "store(5) in x", "x <- 5"],
+                correct: 0,
+                kidFeedback: "Perfect! You use the `=` sign to put the value in your box!",
+                devFeedback: "Correct. The `=` assignment operator binds a name to an object in Python."
+            },
+            {
+                q: "What does the 'def' keyword do?",
+                a: ["Defines a variable", "Defines a function", "Defines a loop"],
+                correct: 1,
+                kidFeedback: "Amazing! 'def' tells Python you are making a recipe machine!",
+                devFeedback: "Correct. `def` is the keyword used to define functions in Python."
+            }
+        ]
+    },
