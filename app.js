@@ -830,3 +830,9 @@ function filterLicensesList() {
 window.addEventListener('keydown', (e) => {
   if(e.altKey && e.key === 'l') switchTab('learn');
 });
+
+function renderFAQ() {
+  const faqTarget = document.getElementById('faq-section');
+  if(!faqTarget) return;
+  faqTarget.innerHTML = '<h3>Frequently Asked Questions</h3><p><strong>Is it free?</strong> Yes, completely free!</p>';
+}
