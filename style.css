@@ -425,3 +425,9 @@ body.kid-mode .nav-item.active {
     grid-template-columns: 1fr;
   }
 }
+
+/* Mobile responsive layout fixes for padding and spacing */
+@media(max-width: 480px) {
+  .header { padding: 0 10px; }
+  .workspace { padding: 15px; }
+}
