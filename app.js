@@ -760,3 +760,7 @@ function resetProgress() {
     alert("Progress successfully reset!");
   }
 }
+
+function saveToLocalStorage() {
+  localStorage.setItem("kawerify_learn_state", JSON.stringify(appState));
+}
