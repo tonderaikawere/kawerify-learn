@@ -477,3 +477,91 @@ function sendToPlayground() {
   DOM.playCodeEditor.value = code;
   switchTab("playground");
 }
+
+function runPlaygroundCode() {
+  const code = DOM.playCodeEditor.value;
+  
+  // Decide how to run based on content
+  if (code.includes("import React") || code.includes("ProfileCard") || code.includes("Counter")) {
+    // Simulated React Iframe compilation
+    DOM.playTerminal.style.display = "none";
+    DOM.playPreviewFrame.style.display = "block";
+    
+    // Quick custom mock rendering inside iframe
+    const doc = DOM.playPreviewFrame.contentDocument || DOM.playPreviewFrame.contentWindow.document;
+    
+    let htmlContent = `
+      <html>
+        <body style="background:#0f172a; display:flex; justify-content:center; align-items:center; height:100vh; margin:0;">
+          <div id="root"></div>
+          <script>
+            // React simulator inside iframe
+            const root = document.getElementById("root");
+    `;
+    
+    if (code.includes("ProfileCard")) {
+      // Profile card template extraction
+      const name = code.match(/h3.*?>\$\{p\.username\|\|(.*?)\}/) || code.match(/<h3>(.*?)<\/h3>/) || ["", "Alex Code"];
+      const job = code.match(/<p.*?>\$\{p\.job\|\|(.*?)\}/) || code.match(/<p.*?>(.*?)<\/p>/) || ["", "Software Engineer"];
+      const borderCol = code.match(/border: '2px solid (.*?)'/) || ["", "#10b981"];
+      
+      htmlContent += `
+        root.innerHTML = \`
+          <div style="border: 2px solid ${borderCol[1]}; border-radius: 10px; padding: 20px; max-width: 300px; background-color: #1e293b; color: #f8fafc; font-family: sans-serif; box-shadow: 0 4px 15px ${borderCol[1]}44">
+            <h3 style="margin: 0 0 10px 0; color: ${borderCol[1]}">${name[1]}</h3>
+            <p style="margin: 0 0 15px 0; font-style: italic">${job[1]}</p>
+            <hr style="border: 0; border-top: 1px solid #475569; margin: 10px 0" />
+            <span style="font-size: 0.8rem; color: #94a3b8">Created with Kawerify Learn</span>
+          </div>
+        \`;
+      `;
+    } else {
+      // Counter mock
+      const initVal = parseInt(code.match(/useState\((\d+)\)/) || [0, 0])[1];
+      const btnCol = code.match(/backgroundColor: '(.*?)'/) || ["", "#0ea5e9"];
+      
+      htmlContent += `
+        let count = ${initVal};
+        function render() {
+          root.innerHTML = \`
+            <div style="text-align: center; padding: 20px; font-family: sans-serif; color: white;">
+              <h2>Count: \${count}</h2>
+              <button id="add" style="background-color: ${btnCol[1]}; color: white; border: none; padding: 10px 20px; borderRadius: 5px; cursor: pointer; margin: 5px; font-weight:bold;">Add One</button>
+              <button id="minus" style="background-color: #64748b; color: white; border: none; padding: 10px 20px; borderRadius: 5px; cursor: pointer; margin: 5px; font-weight:bold;">Minus One</button>
+            </div>
+          \`;
+          document.getElementById("add").addEventListener("click", () => { count++; render(); });
+          document.getElementById("minus").addEventListener("click", () => { count--; render(); });
+        }
+        render();
+      `;
+    }
+    
+    htmlContent += `
+          </script>
+        </body>
+      </html>
+    `;
+    
+    doc.open();
+    doc.write(htmlContent);
+    doc.close();
+  } else if (code.includes("import random") || code.includes("def play_guessing_game") || code.includes("def calculate")) {
+    // Python simulation
+    simulateTerminal("python", code);
+  } else if (code.includes("#include <stdio.h>") || code.includes("void swap") || code.includes("bubble_sort")) {
+    // C simulation
+    simulateTerminal("c", code);
+  } else if (code.includes("<?php") || code.includes("password_hash") || code.includes("$_POST")) {
+    // PHP simulation
+    simulateTerminal("php", code);
+  } else {
+    // Generic HTML/CSS/JS compiler inside iframe
+    DOM.playTerminal.style.display = "none";
+    DOM.playPreviewFrame.style.display = "block";
+    const doc = DOM.playPreviewFrame.contentDocument || DOM.playPreviewFrame.contentWindow.document;
+    doc.open();
+    doc.write(code);
+    doc.close();
+  }
+}
