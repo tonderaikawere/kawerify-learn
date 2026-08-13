@@ -135,6 +135,18 @@
           <div class="legal-container" id="legal-content-target"></div>
         </div>
       </main>
+    <footer style="background-color:var(--bg-panel); border-top:2px solid var(--border-color); padding:15px; display:flex; justify-content:space-between; align-items:center; font-size:0.85rem; color:var(--text-muted);">
+      <div>© 2026 Kawerify Tech (kawerifytech.com) - All Rights Reserved.</div>
+      <div style="display:flex; gap:15px;">
+        <button id="reset-progress-btn" style="background:none; border:none; color:var(--accent-orange); cursor:pointer; font-family:var(--font-sans); font-weight:bold;">🔄 Reset Progress</button>
+        <span id="help-popover-btn" style="cursor:pointer; text-decoration:underline;">❓ Help & FAQ</span>
+      </div>
+      <div id="help-popover-card" style="display:none; position:absolute; bottom:60px; right:20px; width:300px; background-color:var(--bg-panel); border:2px solid var(--border-color); border-radius:var(--border-radius); padding:15px; box-shadow:0 10px 25px rgba(0,0,0,0.3); z-index:100;">
+        <h4 style="margin:0 0 10px 0; color:var(--accent-blue);">FAQ & Quick Start</h4>
+        <p style="margin:0 0 10px 0; line-height:1.4;">Select 'Kid Mode' for cartoon mascots & easy Lego or Recipe analogies! Code is generated in real-time. Hit 'Send to Playground' to run the outputs directly.</p>
+        <button class="btn-action" style="padding:4px 8px; font-size:0.75rem;" id="help-popover-close">Close</button>
+      </div>
+    </footer>
   </div>
 </body>
 </html>
