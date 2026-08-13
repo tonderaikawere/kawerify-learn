@@ -238,3 +238,4 @@ const curriculum = {
 if (typeof window !== 'undefined') { window.curriculum = curriculum; }
 // Curriculum revision step 24 for react
 // Curriculum revision step 25 for python
+// Curriculum revision step 26 for c
