@@ -116,3 +116,42 @@ const curriculum = {
             }
         ]
     },
+    php: {
+        title: "PHP Language",
+        mascot: "Philly the Penguin",
+        mascotEmoji: "🐧",
+        color: "var(--accent-purple)",
+        lessons: [
+            {
+                title: "Server vs Client (The Kitchen)",
+                kid: "PHP lives in the internet kitchen (the Server)! The browser is the customer. The customer orders a web page, and Philly the Penguin cooks it up in the kitchen using PHP, then sends the ready meal (HTML) back to the browser.",
+                dev: "PHP is a server-side scripting language. PHP code is executed on the server, producing standard HTML which is then sent to the client browser. The client never sees the raw PHP source code."
+            },
+            {
+                title: "Dynamic Pages (Custom Cooking)",
+                kid: "If you tell Philly your name, he can write 'Welcome, Friend!' on your plate. PHP makes web pages dynamic, which means they can change for every visitor who opens the site!",
+                dev: "PHP enables dynamic content generation by interpolating variables directly into HTML, connecting to databases, and rendering elements based on condition states before serving the response."
+            },
+            {
+                title: "Forms & Requests (Post Office)",
+                kid: "When you type in a message box and click Send, PHP receives it! It reads the special delivery package using code like `$_POST['message']` and stores it safely.",
+                dev: "PHP processes HTTP requests. Client form submissions are sent via GET or POST methods and are parsed into superglobals like `$_GET`, `$_POST`, and `$_REQUEST` for server-side operations."
+            }
+        ],
+        quizzes: [
+            {
+                q: "Where does PHP code execute?",
+                a: ["In the visitor's browser", "On the web server", "On your local router"],
+                correct: 1,
+                kidFeedback: "Exactly! Philly the Penguin cooks PHP inside the server kitchen!",
+                devFeedback: "Correct. PHP is a server-side engine; it executes and outputs static HTML/CSS to the client."
+            },
+            {
+                q: "What variable holds POST form data in PHP?",
+                a: ["$POST_DATA", "$_POST", "$HTTP_POST"],
+                correct: 1,
+                kidFeedback: "Perfect! PHP uses $_POST to fetch form data submissions!",
+                devFeedback: "Correct. `$_POST` is an associative array of variables passed via the HTTP POST method."
+            }
+        ]
+    },
