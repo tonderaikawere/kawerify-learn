@@ -146,3 +146,23 @@ function initEventListeners() {
   DOM.helpBtn.addEventListener("click", () => DOM.helpCard.style.display = "block");
   DOM.helpCloseBtn.addEventListener("click", () => DOM.helpCard.style.display = "none");
 }
+
+function switchTab(tab) {
+  appState.activeTab = tab;
+  DOM.navBtns.forEach(btn => {
+    if (btn.getAttribute("data-tab") === tab) {
+      btn.classList.add("active");
+    } else {
+      btn.classList.remove("active");
+    }
+  });
+  
+  DOM.tabContents.forEach(content => {
+    if (content.id === `tab-${tab}`) {
+      content.classList.add("active");
+    } else {
+      content.classList.remove("active");
+    }
+  });
+  saveToLocalStorage();
+}
