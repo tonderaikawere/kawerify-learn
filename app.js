@@ -565,3 +565,71 @@ function runPlaygroundCode() {
     doc.close();
   }
 }
+
+function simulateTerminal(lang, code) {
+  DOM.playPreviewFrame.style.display = "none";
+  DOM.playTerminal.style.display = "block";
+  DOM.playTerminalBody.innerHTML = "";
+  
+  let lines = [];
+  if (lang === "python") {
+    lines.append({ text: "$ python main.py", type: "input" });
+    if (code.includes("play_guessing_game")) {
+      const maxRange = code.match(/random.randint\(1, (\d+)\)/) || [0, 10];
+      const attempts = code.match(/attempts = (\d+)/) || [0, 3];
+      lines.append({ text: "Welcome to Kawerify Guessing Game!", type: "out" });
+      lines.append({ text: `Guess a number between 1 and ${maxRange[1]}.`, type: "out" });
+      lines.append({ text: "Attempt 1: Enter guess: 5", type: "input" });
+      lines.append({ text: "Too high!", type: "out" });
+      lines.append({ text: "Attempt 2: Enter guess: 3", type: "input" });
+      lines.append({ text: "Too low!", type: "out" });
+      lines.append({ text: "Attempt 3: Enter guess: 4", type: "input" });
+      lines.append({ text: "🎉 Hooray! You guessed correctly!", type: "out" });
+    } else {
+      const mode = code.match(/running in (.*?) mode/) || ["", "Scientific"];
+      lines.append({ text: `Calculator running in ${mode[1]} mode...`, type: "out" });
+      lines.append({ text: "Multiplying: 10 * 5", type: "out" });
+      lines.append({ text: "Output Result: 50", type: "out" });
+    }
+  } else if (lang === "c") {
+    lines.append({ text: "$ gcc main.c -o main && ./main", type: "input" });
+    if (code.includes("swap")) {
+      const val1 = code.match(/int x = (\d+);/) || [0, 42];
+      const val2 = code.match(/int y = (\d+);/) || [0, 99];
+      lines.append({ text: `Before swap: x = ${val1[1]}, y = ${val2[1]}`, type: "out" });
+      lines.append({ text: `After swap:  x = ${val2[1]}, y = ${val1[1]}`, type: "out" });
+    } else {
+      lines.append({ text: "Sorting array...", type: "out" });
+      lines.append({ text: "Sorted array result: 5 12 23 54 89", type: "out" });
+    }
+  } else if (lang === "php") {
+    lines.append({ text: "$ php main.php", type: "input" });
+    if (code.includes("password_hash")) {
+      lines.append({ text: "Raw Password: Kawerify123!", type: "out" });
+      lines.append({ text: "Hashed Result: $2y$10$tPjG/16gG4W1n6o.x3xUuuT.47hY... (bcrypt)", type: "out" });
+      lines.append({ text: "Password verified successfully!", type: "out" });
+    } else {
+      const email = code.match(/to = "(.*?)"/) || ["", "hello@kawerifytech.com"];
+      lines.append({ text: "Request Type: POST", type: "out" });
+      lines.append({ text: `Thank you, your message has been sent to ${email[1]}`, type: "out" });
+    }
+  }
+  
+  let i = 0;
+  function printNextLine() {
+    if (i < lines.length) {
+      const line = lines[i];
+      const div = document.createElement("div");
+      div.className = "terminal-line";
+      if (line.type === "input") {
+        div.innerHTML = `<span class="terminal-input">${line.text}</span>`;
+      } else {
+        div.innerText = line.text;
+      }
+      DOM.playTerminalBody.appendChild(div);
+      i++;
+      setTimeout(printNextLine, 600);
+    }
+  }
+  printNextLine();
+}
