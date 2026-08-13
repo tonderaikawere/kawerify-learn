@@ -96,7 +96,7 @@
         </div>
         <div class="tab-content" id="tab-licenses">
           <div style="margin-bottom: 20px;">
-            <input type="text" id="license-search-input" placeholder="Search licenses..." style="padding:10px; font-family:var(--font-sans); border-radius:var(--border-radius); border:1px solid var(--border-color); background:var(--bg-panel); color:var(--text-active); width:100%;">
+            <input type="text" id="license-search-input" placeholder="Search licenses..." oninput="filterLicensesList()" style="padding:10px; font-family:var(--font-sans); border-radius:var(--border-radius); border:1px solid var(--border-color); background:var(--bg-panel); color:var(--text-active); width:100%;">
           </div>
           <div class="license-grid">
             <div class="license-list" id="license-list-target"></div>
