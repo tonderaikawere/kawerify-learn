@@ -447,3 +447,6 @@ body.kid-mode .btn-action {
 #lesson-search-input { outline: none; border-color: var(--accent-blue); }
 
 #help-tooltip { position:absolute; bottom:40px; right:10px; background:#1e293b; padding:10px; }
+
+/* High-contrast active progress indicators */
+.progress-glow { box-shadow: 0 0 10px var(--accent-green); }
