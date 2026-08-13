@@ -127,4 +127,62 @@ if __name__ == "__main__":
 print(calculate(10, 5, '*'))`
         }
     ],
+    c: [
+        {
+            name: "Swapper (Pointer Lesson)",
+            description: "Swaps two variable values using memory references.",
+            params: [
+                { name: "First Value", id: "val1", type: "number", default: 42 },
+                { name: "Second Value", id: "val2", type: "number", default: 99 }
+            ],
+            compile: (p) => `#include <stdio.h>
+
+void swap(int *a, int *b) {
+    int temp = *a;
+    *a = *b;
+    *b = temp;
+}
+
+int main() {
+    int x = ${p.val1};
+    int y = ${p.val2};
+    printf("Before swap: x = %d, y = %d\n", x, y);
+    swap(&x, &y);
+    printf("After swap:  x = %d, y = %d\n", x, y);
+    return 0;
+}`
+        },
+        {
+            name: "Custom Array Sorter",
+            description: "Statically sorts arrays of values using bubble sort.",
+            params: [
+                { name: "Array Size", id: "size", type: "number", default: 5 }
+            ],
+            compile: (p) => `#include <stdio.h>
+
+void bubble_sort(int arr[], int n) {
+    for (int i = 0; i < n-1; i++) {
+        for (int j = 0; j < n-i-1; j++) {
+            if (arr[j] > arr[j+1]) {
+                int temp = arr[j];
+                arr[j] = arr[j+1];
+                arr[j+1] = temp;
+            }
+        }
+    }
+}
+
+int main() {
+    int data[${p.size}] = {23, 12, 89, 5, 54};
+    int n = ${p.size};
+    printf("Sorting array...\n");
+    bubble_sort(data, n);
+    for(int i=0; i<n; i++) {
+        printf("%d ", data[i]);
+    }
+    printf("\n");
+    return 0;
+}`
+        }
+    ],
 };
