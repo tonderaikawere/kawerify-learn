@@ -808,3 +808,4 @@ window.addEventListener("DOMContentLoaded", () => {
 
 // Added custom SVG mascot dictionary mapping for React
 const mascotSVGs = {};
+mascotSVGs.python = `<svg width='50' height='50' viewBox='0 0 100 100'></svg>`;
