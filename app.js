@@ -377,3 +377,52 @@ function triggerConfetti() {
     styleEl.remove();
   }, 1500);
 }
+
+function renderGenerator() {
+  const langKey = appState.generatorLang;
+  const templatesList = window.templates[langKey];
+  const target = DOM.genOptsTarget;
+  if (!templatesList || !target) return;
+  
+  let html = `
+    <h3 style="margin-top:0;">1. Choose Template</h3>
+    <div style="display:flex; flex-direction:column; gap:8px;">
+  `;
+  
+  templatesList.forEach((temp, index) => {
+    html += `
+      <button class="option-btn ${appState.generatorTemplateIdx === index ? 'active' : ''}" style="width:100%; font-weight:bold; ${appState.generatorTemplateIdx === index ? 'border-color:var(--accent-blue); background:rgba(14, 165, 233, 0.1);' : ''}" onclick="selectTemplate(${index})">
+        ${temp.name}
+        <div style="font-size:0.8rem; font-weight:normal; color:var(--text-muted); margin-top:2px;">${temp.description}</div>
+      </button>
+    `;
+  });
+  
+  html += `
+    </div>
+    <h3 style="margin-top:20px;">2. Customize Variables</h3>
+    <div style="display:flex; flex-direction:column; gap:12px;" id="generator-variables-target">
+  `;
+  
+  const activeTemp = templatesList[appState.generatorTemplateIdx];
+  if (activeTemp && activeTemp.params) {
+    activeTemp.params.forEach(param => {
+      const val = param.default;
+      html += `
+        <div class="input-field">
+          <label>${param.name}</label>
+          <input type="${param.type}" id="param-${param.id}" value="${val}" oninput="compileGeneratedCode()">
+        </div>
+      `;
+    });
+  }
+  
+  html += `</div>`;
+  target.innerHTML = html;
+  
+  // Set Filename
+  const ext = langKey === "react" ? "jsx" : langKey === "python" ? "py" : langKey === "c" ? "c" : langKey === "php" ? "php" : langKey === "javascript" ? "js" : "html";
+  DOM.genFileName.innerText = `component.${ext}`;
+  
+  compileGeneratedCode();
+}
