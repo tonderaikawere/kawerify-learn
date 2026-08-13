@@ -85,3 +85,64 @@ function cacheDOM() {
   DOM.helpCard = document.getElementById("help-popover-card");
   DOM.helpCloseBtn = document.getElementById("help-popover-close");
 }
+
+function initEventListeners() {
+  DOM.navBtns.forEach(btn => {
+    btn.addEventListener("click", () => {
+      const tab = btn.getAttribute("data-tab");
+      switchTab(tab);
+    });
+  });
+  
+  DOM.themeToggle.addEventListener("click", toggleTheme);
+  DOM.kidToggle.addEventListener("click", toggleKidMode);
+  DOM.currLangSelect.addEventListener("change", (e) => {
+    appState.curriculumLang = e.target.value;
+    renderCurriculum();
+  });
+  
+  DOM.lessonSearchInput.addEventListener("input", renderCurriculum);
+  
+  DOM.genLangSelect.addEventListener("change", (e) => {
+    appState.generatorLang = e.target.value;
+    appState.generatorTemplateIdx = 0;
+    renderGenerator();
+  });
+  
+  DOM.genBtnCopy.addEventListener("click", () => {
+    copyToClipboard(DOM.genCodeTarget.innerText);
+  });
+  
+  DOM.genBtnPlayground.addEventListener("click", sendToPlayground);
+  DOM.playBtnRun.addEventListener("click", runPlaygroundCode);
+  DOM.playBtnDownload.addEventListener("click", downloadCodeFile);
+  
+  DOM.licSearchInput.addEventListener("input", renderLicenseList);
+  DOM.licBtnCopy.addEventListener("click", () => {
+    copyToClipboard(DOM.licTextTarget.innerText);
+  });
+  
+  DOM.licYearInput.addEventListener("input", (e) => {
+    appState.licenseYear = e.target.value;
+    renderLicenseText();
+  });
+  
+  DOM.licOwnerInput.addEventListener("input", (e) => {
+    appState.licenseOwner = e.target.value;
+    renderLicenseText();
+  });
+  
+  DOM.legDocBtns.forEach(btn => {
+    btn.addEventListener("click", () => {
+      DOM.legDocBtns.forEach(b => b.classList.remove("active"));
+      btn.classList.add("active");
+      const doc = btn.getAttribute("data-legal");
+      appState.legalDoc = doc;
+      renderLegalDoc();
+    });
+  });
+  
+  DOM.resetProgressBtn.addEventListener("click", resetProgress);
+  DOM.helpBtn.addEventListener("click", () => DOM.helpCard.style.display = "block");
+  DOM.helpCloseBtn.addEventListener("click", () => DOM.helpCard.style.display = "none");
+}
