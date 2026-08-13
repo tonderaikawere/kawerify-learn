@@ -453,3 +453,21 @@ window.compileGeneratedCode = function() {
   const code = activeTemp.compile(params);
   DOM.genCodeTarget.innerText = code;
 }
+
+function copyToClipboard(text) {
+  navigator.clipboard.writeText(text).then(() => {
+    const popup = document.createElement("div");
+    popup.style.position = "fixed";
+    popup.style.bottom = "20px";
+    popup.style.left = "50%";
+    popup.style.transform = "translateX(-50%)";
+    popup.style.backgroundColor = "var(--accent-green)";
+    popup.style.color = "white";
+    popup.style.padding = "10px 20px";
+    popup.style.borderRadius = "20px";
+    popup.style.fontWeight = "bold";
+    popup.innerText = "📋 Code Copied!";
+    document.body.appendChild(popup);
+    setTimeout(() => popup.remove(), 2000);
+  });
+}
