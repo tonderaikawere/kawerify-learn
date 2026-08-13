@@ -723,3 +723,30 @@ function renderLicenseText() {
       target.innerText = "Error loading license agreement text file.";
     });
 }
+
+function renderLegalDoc() {
+  const doc = appState.legalDoc;
+  const target = DOM.legContentTarget;
+  if (!target) return;
+  
+  fetch(`legal/${doc}.md`)
+    .then(r => r.text())
+    .then(text => {
+      // Simple markdown to HTML parser
+      let html = text
+        .replace(/^# (.*?)$/gm, '<h1>$1</h1>')
+        .replace(/^## (.*?)$/gm, '<h2>$1</h2>')
+        .replace(/^\*\*(.*?)\*\*/gm, '<strong>$1</strong>')
+        .replace(/^\* (.*?)$/gm, '<li>$1</li>');
+      
+      // Wrap list items
+      html = html.replace(/(<li>.*?<\/li>)/gs, '<ul>$1</ul>');
+      // Fix duplicate wrapping tags
+      html = html.replace(/<\/ul>\s*<ul>/g, '');
+      
+      target.innerHTML = html;
+    })
+    .catch(() => {
+      target.innerHTML = "<p>Error loading legal documentation page.</p>";
+    });
+}
