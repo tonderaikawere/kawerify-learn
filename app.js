@@ -789,3 +789,19 @@ function loadFromLocalStorage() {
     }
   }
 }
+
+window.addEventListener("DOMContentLoaded", () => {
+  cacheDOM();
+  initEventListeners();
+  loadFromLocalStorage();
+  
+  // Switch to default tab
+  switchTab(appState.activeTab);
+  
+  // Initial renders
+  renderCurriculum();
+  renderGenerator();
+  renderLicenseList();
+  renderLicenseText();
+  renderLegalDoc();
+});
