@@ -818,3 +818,6 @@ mascotSVGs.html_css = `<svg width='50' height='50' viewBox='0 0 100 100'></svg>`
 function injectMascotSVG(langKey) {
   return mascotSVGs[langKey] || '';
 }
+
+// Developer note: The application implements a client-side architecture
+// utilizing local storage to maintain data persistence seamlessly.
