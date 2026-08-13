@@ -345,3 +345,14 @@ body.kid-mode .nav-item.active {
   resize: none;
   box-sizing: border-box;
 }
+.playground-preview {
+  background-color: white;
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius);
+  overflow: hidden;
+}
+.preview-iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+}
