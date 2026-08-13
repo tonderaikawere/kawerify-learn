@@ -356,3 +356,32 @@ body.kid-mode .nav-item.active {
   height: 100%;
   border: none;
 }
+.license-grid {
+  display: grid;
+  grid-template-columns: 300px 1fr;
+  gap: 20px;
+}
+.license-list {
+  background-color: var(--bg-panel);
+  border-radius: var(--border-radius);
+  border: 1px solid var(--border-color);
+  padding: 15px;
+  max-height: 500px;
+  overflow-y: auto;
+}
+.license-item-btn {
+  display: block;
+  width: 100%;
+  padding: 10px;
+  text-align: left;
+  background: none;
+  border: none;
+  border-radius: var(--border-radius);
+  color: var(--text-active);
+  cursor: pointer;
+  font-weight: 500;
+}
+.license-item-btn.active {
+  background-color: var(--accent-blue);
+  color: white;
+}
