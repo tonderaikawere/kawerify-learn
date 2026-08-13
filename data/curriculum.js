@@ -260,3 +260,7 @@ if (typeof window !== 'undefined') { window.curriculum = curriculum; }
 // Curriculum revision step 45 for php
 // Curriculum revision step 46 for javascript
 // Curriculum revision step 47 for html_css
+
+curriculum.faq = [
+  { q: 'Is this platform really free?', a: 'Yes! It is completely free with no restrictions.' }
+];
