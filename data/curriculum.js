@@ -77,3 +77,42 @@ const curriculum = {
             }
         ]
     },
+    c: {
+        title: "C Language",
+        mascot: "Captain C",
+        mascotEmoji: "⚓",
+        color: "var(--accent-yellow)",
+        lessons: [
+            {
+                title: "Types & Strict Sizes",
+                kid: "In C, you have to be very organized. Every box must be built for a specific toy! A number box (`int`) can only hold numbers, and a letter box (`char`) can only hold letters. You can't mix them up!",
+                dev: "C is a statically typed language. Every variable must be declared with a data type (e.g. `int`, `float`, `char`, `double`), which dictates the size of memory allocated and how the binary data is interpreted."
+            },
+            {
+                title: "Pointers (Treasure Maps)",
+                kid: "A **Pointer** is a treasure map! It doesn't have gold inside; instead, it has the exact coordinates of where the gold is buried in memory. If you follow the coordinates, you find the value!",
+                dev: "A pointer is a variable that stores the memory address of another variable. The `&` operator retrieves a variable's address, and the `*` operator dereferences a pointer to access or modify the value at that address."
+            },
+            {
+                title: "Memory Allocation (Renting Boxes)",
+                kid: "C doesn't clean up your room automatically! When you need space, you ask for it using `malloc()` (renting space). When you're done, you MUST call `free()` to give it back, or your room gets full!",
+                dev: "C provides manual memory management. Dynamic memory is allocated on the heap using `malloc()` or `calloc()` and must be explicitly deallocated using `free()` to prevent memory leaks."
+            }
+        ],
+        quizzes: [
+            {
+                q: "What does a Pointer store?",
+                a: ["A number value", "A memory address", "A text string"],
+                correct: 1,
+                kidFeedback: "Super! A pointer is a map that stores a memory coordinates address!",
+                devFeedback: "Correct. Pointers store hexadecimal memory addresses of variable locations."
+            },
+            {
+                q: "What must you do after using malloc()?",
+                a: ["Call free() to release memory", "Nothing, C cleans it up", "Call delete()"],
+                correct: 0,
+                kidFeedback: "Brilliant! You must call free() so you don't run out of storage space!",
+                devFeedback: "Correct. Every malloc call requires a corresponding free call to avoid memory leaks."
+            }
+        ]
+    },
