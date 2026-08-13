@@ -166,3 +166,34 @@ function switchTab(tab) {
   });
   saveToLocalStorage();
 }
+
+function toggleTheme() {
+  if (appState.theme === "dark") {
+    appState.theme = "light";
+    document.body.classList.remove("dark-theme");
+    document.body.classList.add("light-theme");
+    DOM.themeToggle.innerText = "🌙 Dark Mode";
+  } else {
+    appState.theme = "dark";
+    document.body.classList.remove("light-theme");
+    document.body.classList.add("dark-theme");
+    DOM.themeToggle.innerText = "☀️ Light Mode";
+  }
+  saveToLocalStorage();
+}
+
+function toggleKidMode() {
+  if (appState.mode === "dev") {
+    appState.mode = "kid";
+    document.body.classList.remove("dev-mode");
+    document.body.classList.add("kid-mode");
+    DOM.kidToggle.innerText = "👨‍💻 Dev Mode";
+  } else {
+    appState.mode = "dev";
+    document.body.classList.remove("kid-mode");
+    document.body.classList.add("dev-mode");
+    DOM.kidToggle.innerText = "🧒 Kid Mode";
+  }
+  renderCurriculum();
+  saveToLocalStorage();
+}
