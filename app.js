@@ -825,3 +825,8 @@ function injectMascotSVG(langKey) {
 function filterLicensesList() {
   renderLicenseList();
 }
+
+// Keyboard shortcuts listener for accessibility
+window.addEventListener('keydown', (e) => {
+  if(e.altKey && e.key === 'l') switchTab('learn');
+});
