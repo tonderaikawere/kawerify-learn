@@ -78,4 +78,53 @@ export default function ProfileCard() {
 }`
         }
     ],
+    python: [
+        {
+            name: "Number Guessing Game",
+            description: "Interactive CLI game using random choice numbers.",
+            params: [
+                { name: "Maximum Range", id: "maxNum", type: "number", default: 10 },
+                { name: "Max Attempts", id: "attempts", type: "number", default: 3 }
+            ],
+            compile: (p) => `import random
+
+def play_guessing_game():
+    secret_number = random.randint(1, ${p.maxNum})
+    attempts = ${p.attempts}
+    print("Welcome to Kawerify Guessing Game!")
+    print("Guess a number between 1 and ${p.maxNum}.")
+    
+    for i in range(attempts):
+        guess = int(input(f"Attempt {i+1}: Enter guess: "))
+        if guess == secret_number:
+            print("Hooray! You guessed correctly!")
+            return True
+        elif guess < secret_number:
+            print("Too low!")
+        else:
+            print("Too high!")
+            
+    print(f"Game over! The number was {secret_number}.")
+    return False
+
+if __name__ == "__main__":
+    play_guessing_game()`
+        },
+        {
+            name: "Text Calculator Engine",
+            description: "Executes basic operational calculation algorithms.",
+            params: [
+                { name: "Default Mode", id: "mode", type: "text", default: "Scientific" }
+            ],
+            compile: (p) => `def calculate(a, b, op):
+    print(f"Calculator running in ${p.mode} mode...")
+    if op == '+': return a + b
+    elif op == '-': return a - b
+    elif op == '*': return a * b
+    elif op == '/': return a / b if b != 0 else "Error: Division by zero"
+    return "Unknown operation"
+
+print(calculate(10, 5, '*'))`
+        }
+    ],
 };
