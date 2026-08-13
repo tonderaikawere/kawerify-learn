@@ -821,3 +821,7 @@ function injectMascotSVG(langKey) {
 
 // Developer note: The application implements a client-side architecture
 // utilizing local storage to maintain data persistence seamlessly.
+
+function filterLicensesList() {
+  renderLicenseList();
+}
