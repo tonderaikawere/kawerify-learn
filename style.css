@@ -392,3 +392,11 @@ body.kid-mode .nav-item.active {
   padding: 20px;
   margin-top: 20px;
 }
+.legal-container {
+  max-width: 800px;
+  margin: 0 auto;
+  line-height: 1.7;
+}
+.legal-container h1, .legal-container h2 {
+  color: var(--accent-blue);
+}
