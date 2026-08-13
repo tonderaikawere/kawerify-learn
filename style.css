@@ -284,3 +284,18 @@ body.kid-mode .nav-item.active {
   font-size: 0.95rem;
   white-space: pre-wrap;
 }
+.btn-action {
+  background-color: var(--accent-blue);
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: var(--border-radius);
+  cursor: pointer;
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+.btn-action:hover {
+  opacity: 0.9;
+}
