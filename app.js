@@ -699,3 +699,27 @@ window.selectLicense = function(id) {
   renderLicenseList();
   renderLicenseText();
 }
+
+function renderLicenseText() {
+  const id = appState.activeLicense;
+  const year = appState.licenseYear;
+  const owner = appState.licenseOwner;
+  const target = DOM.licTextTarget;
+  if (!target) return;
+  
+  DOM.licNameTitle.innerText = `${id.toUpperCase()}_LICENSE.txt`;
+  
+  // Fetch local text template file
+  fetch(`licenses/${id}.txt`)
+    .then(r => r.text())
+    .then(text => {
+      // Replace copyright placeholders if needed
+      let formattedText = text;
+      formattedText = formattedText.replace(/Copyright \(c\) \d+.*?\n/g, `Copyright (c) ${year} ${owner}\n`);
+      formattedText = formattedText.replace(/Copyright \d+.*?\n/g, `Copyright ${year} ${owner}\n`);
+      target.innerText = formattedText;
+    })
+    .catch(() => {
+      target.innerText = "Error loading license agreement text file.";
+    });
+}
