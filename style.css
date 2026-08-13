@@ -184,3 +184,28 @@ body.kid-mode .nav-item.active {
   50% { transform: translateY(-8px); }
   100% { transform: translateY(0px); }
 }
+.quiz-section {
+  background-color: var(--bg-panel);
+  border-radius: var(--border-radius);
+  border: 2px solid var(--border-color);
+  padding: 24px;
+}
+.quiz-options {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 15px;
+}
+.option-btn {
+  background-color: var(--bg-active);
+  border: 1px solid var(--border-color);
+  color: var(--text-active);
+  padding: 12px 15px;
+  text-align: left;
+  border-radius: var(--border-radius);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+.option-btn:hover {
+  background-color: var(--border-color);
+}
