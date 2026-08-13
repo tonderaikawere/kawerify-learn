@@ -185,4 +185,54 @@ int main() {
 }`
         }
     ],
+    php: [
+        {
+            name: "Contact Form Handler",
+            description: "Extracts post variables and handles email redirection.",
+            params: [
+                { name: "Receiver Email", id: "receiver", type: "text", default: "hello@kawerifytech.com" }
+            ],
+            compile: (p) => `<?php
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $name = htmlspecialchars($_POST["name"]);
+    $email = filter_var($_POST["email"], FILTER_VALIDATE_EMAIL);
+    $msg = htmlspecialchars($_POST["message"]);
+    
+    if ($email) {
+        $to = "${p.receiver}";
+        $subject = "New Contact from " . $name;
+        $headers = "From: " . $email;
+        
+        // mail($to, $subject, $msg, $headers);
+        echo "Thank you, your message has been sent to " . $to;
+    } else {
+        echo "Error: Invalid email address.";
+    }
+}
+?>`
+        },
+        {
+            name: "Secure Password Hasher",
+            description: "Demonstrates dynamic password hashing verification.",
+            params: [
+                { name: "Hash Strength", id: "cost", type: "number", default: 10 }
+            ],
+            compile: (p) => `<?php
+$password = "Kawerify123!";
+$options = [
+    'cost' => ${p.cost}
+];
+
+$hashedPassword = password_hash($password, PASSWORD_BCRYPT, $options);
+echo "Raw Password: " . $password . "\n";
+echo "Hashed Result: " . $hashedPassword . "\n";
+
+if (password_verify("Kawerify123!", $hashedPassword)) {
+    echo "Password verified successfully!";
+} else {
+    echo "Verification failed.";
+}
+?>`
+        }
+    ],
 };
