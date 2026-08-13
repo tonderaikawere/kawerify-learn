@@ -131,3 +131,25 @@ body.kid-mode .nav-item.active {
   border: 3px solid var(--text-active);
   box-shadow: 0 4px 0 var(--text-active);
 }
+.workspace {
+  padding: 30px;
+  overflow-y: auto;
+}
+.tab-content {
+  display: none;
+}
+.tab-content.active {
+  display: block;
+}
+.learn-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 30px;
+}
+.lesson-card {
+  background-color: var(--bg-panel);
+  border: 2px solid var(--border-color);
+  border-radius: var(--border-radius);
+  padding: 24px;
+  margin-bottom: 20px;
+}
