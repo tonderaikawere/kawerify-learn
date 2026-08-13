@@ -246,3 +246,4 @@ if (typeof window !== 'undefined') { window.curriculum = curriculum; }
 // Curriculum revision step 31 for python
 // Curriculum revision step 32 for c
 // Curriculum revision step 33 for php
+// Curriculum revision step 34 for javascript
