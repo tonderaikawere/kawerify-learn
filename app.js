@@ -836,3 +836,7 @@ function renderFAQ() {
   if(!faqTarget) return;
   faqTarget.innerHTML = '<h3>Frequently Asked Questions</h3><p><strong>Is it free?</strong> Yes, completely free!</p>';
 }
+
+function triggerFileDownload(filename, content) {
+  console.log('Downloading file:', filename);
+}
