@@ -14,18 +14,27 @@
   <div class="app-container">
     <div id="system-alert-banner" style="display:none; position:fixed; top:20px; right:20px; z-index:1000;"></div>
     <div id="system-error-banner" style="display:none; position:fixed; top:80px; right:20px; z-index:1000;"></div>
+    
     <header class="header">
       <div class="logo-container">
         <span class="logo-text">Kawerify Learn</span>
-        <span style="font-size:0.75rem; color:var(--text-muted);">by kawerifytech.com | Powered by Kawerify Tech</span>
+        <span class="logo-brand-subtext">by kawerifytech.com | Powered by Kawerify Tech</span>
       </div>
       <div class="controls-group">
         <button class="toggle-btn" id="kid-toggle-btn">🧒 Kid Mode</button>
         <button class="toggle-btn" id="theme-toggle-btn">☀️ Light Mode</button>
-        <input type="checkbox" id="audio-toggle-checkbox" style="margin-left: 10px;">🔊 Sound FX
-        <input type='color' id='accent-picker' value='#0ea5e9' style='border:none; background:none; cursor:pointer; width:30px; height:30px;'>
+        <div class="header-setting-item">
+          <input type="checkbox" id="audio-toggle-checkbox">
+          <label for="audio-toggle-checkbox">🔊 Sound FX</label>
+        </div>
+        <div class="header-setting-item">
+          <input type='color' id='accent-picker' value='#0ea5e9'>
+          <label for="accent-picker">🎨 Color</label>
+        </div>
       </div>
     </header>
+
+    <div class="main-body">
       <aside class="sidebar">
         <button class="nav-item active" data-tab="learn">📖 Learn Code</button>
         <button class="nav-item" data-tab="generator">⚡ Code Generator</button>
@@ -34,27 +43,38 @@
         <button class="nav-item" data-tab="legal">🛡️ Legal Docs</button>
         <button class="nav-item" data-tab="resources">📚 Resources</button>
       </aside>
+
       <main class="workspace">
+        <!-- LEARN CODE TAB -->
         <div class="tab-content active" id="tab-learn">
-          <div style="margin-bottom: 20px; display:flex; gap:10px;">
-            <select id="curriculum-lang-select" style="padding:10px; font-family:var(--font-sans); border-radius:var(--border-radius); border:1px solid var(--border-color); background:var(--bg-panel); color:var(--text-active);">
-              <option value="react">React Library</option>
-              <option value="python">Python Language</option>
-              <option value="c">C Language</option>
-              <option value="cpp">C++ Language</option>
-              <option value="csharp">C# Language</option>
-              <option value="php">PHP Language</option>
-              <option value="javascript">JavaScript Language</option>
-              <option value="html_css">HTML & CSS</option>
-            </select>
-            <input type="text" id="lesson-search-input" placeholder="Search lessons..." id="lesson-search-input" style="padding:10px; font-family:var(--font-sans); border-radius:var(--border-radius); border:1px solid var(--border-color); background:var(--bg-panel); color:var(--text-active); flex-grow:1;">
+          <!-- Catalog View (Dashboard showing all courses, Alison-style) -->
+          <div id="curriculum-catalog-view">
+            <div class="catalog-header-banner">
+              <h2>Browse Free Online Coding Courses</h2>
+              <p>Acquire coding skills step-by-step with interactive analogies and quizzes.</p>
+              <div class="catalog-search-wrapper">
+                <input type="text" id="course-search-input" placeholder="Search courses (e.g. Python, C++, React)...">
+              </div>
+            </div>
+            <div id="course-catalog-grid" class="courses-grid">
+              <!-- Rendered dynamically by app.js -->
+            </div>
           </div>
-          <div id="curriculum-view-target"></div>
-          <div id="faq-section" style="margin-top:40px;"></div>
+
+          <!-- Course Details View (Hidden by default, shown when course is opened) -->
+          <div id="curriculum-details-view" style="display:none;">
+            <button class="btn-back-catalog" id="btn-back-to-catalog">← Back to Course Catalog</button>
+            <div id="curriculum-view-target"></div>
+          </div>
+
+          <!-- FAQ Section -->
+          <div id="faq-section"></div>
         </div>
+
+        <!-- CODE GENERATOR TAB -->
         <div class="tab-content" id="tab-generator">
           <div style="margin-bottom: 20px;">
-            <select id="generator-lang-select" style="padding:10px; font-family:var(--font-sans); border-radius:var(--border-radius); border:1px solid var(--border-color); background:var(--bg-panel); color:var(--text-active);">
+            <select id="generator-lang-select" class="styled-select">
               <option value="react">React Templates</option>
               <option value="python">Python Templates</option>
               <option value="c">C Templates</option>
@@ -81,26 +101,25 @@
             </div>
           </div>
         </div>
+
+        <!-- PLAYGROUND TAB -->
         <div class="tab-content" id="tab-playground">
           <div class="playground-split">
-            <div style="display:flex; flex-direction:column; gap:10px; height:100%;">
-              <div style="display:flex; justify-content:space-between; align-items:center;">
-                <span style="font-weight:bold;">Code Editor (<a href='https://developer.mozilla.org/en-US/docs/Web' target='_blank' style='color:var(--accent-blue)'>Docs</a>)</span>
-                <div style="display:flex; gap:10px;">
+            <div class="editor-pane">
+              <div class="editor-header">
+                <span class="pane-title">Code Editor (<a href='https://developer.mozilla.org/en-US/docs/Web' target='_blank' class="inline-link">Docs</a>)</span>
+                <div class="editor-actions">
                   <button class="btn-action" id="playground-btn-download" style="background-color:#64748b;">📥 Download</button>
                   <button class='btn-action' id='playground-btn-export' style='background:#f59e0b;'>📤 Export HTML</button>
                   <button class="btn-action" id="playground-btn-run">▶️ Run Code</button>
                 </div>
               </div>
-              <textarea class="playground-editor" id="playground-code-editor" placeholder="<!-- Write HTML/CSS/JS code below -->
-
-<h1>Hello World!</h1>
-<p>Start writing your program...</p>"></textarea>
+              <textarea class="playground-editor" id="playground-code-editor" placeholder="<!-- Write HTML/CSS/JS code below -->&#10;&#10;<h1>Hello World!</h1>&#10;<p>Start writing your program...</p>"></textarea>
             </div>
-            <div style="display:flex; flex-direction:column; gap:10px; height:100%;">
-              <span style="font-weight:bold;">Console / Output</span>
-              <div class="playground-preview" style="height:100%;">
-                <iframe class="preview-iframe" id="playground-preview-frame"></div>
+            <div class="output-pane">
+              <span class="pane-title">Console / Output</span>
+              <div class="playground-preview">
+                <iframe class="preview-iframe" id="playground-preview-frame"></iframe>
               </div>
               <div class="terminal-container" id="playground-terminal" style="display:none;">
                 <div class="terminal-header">Simulated Terminal CLI</div>
@@ -109,24 +128,28 @@
             </div>
           </div>
         </div>
+
+        <!-- LICENSES TAB -->
         <div class="tab-content" id="tab-licenses">
           <div style="margin-bottom: 20px;">
-            <input type="text" id="license-search-input" placeholder="Search licenses..." oninput="filterLicensesList()" style="padding:10px; font-family:var(--font-sans); border-radius:var(--border-radius); border:1px solid var(--border-color); background:var(--bg-panel); color:var(--text-active); width:100%;">
+            <input type="text" id="license-search-input" placeholder="Search licenses..." oninput="filterLicensesList()" class="styled-search-bar">
           </div>
           <div class="license-grid">
             <div class="license-list" id="license-list-target"></div>
-            <div>
+            <div class="license-viewer-pane">
               <div class="code-output-container">
                 <div class="code-header">
                   <span class="code-title" id="license-name-title">LICENSE.txt</span>
-                  <button class="btn-action" id="license-btn-copy">📋 Copy License</button>
-                  <button class='btn-action' id='license-btn-reset' style='background:#64748b; margin-left:10px;'>🔄 Reset Fields</button>
+                  <div style="display:flex; gap:10px;">
+                    <button class="btn-action" id="license-btn-copy">📋 Copy License</button>
+                    <button class='btn-action' id='license-btn-reset' style='background:#64748b;'>🔄 Reset Fields</button>
+                  </div>
                 </div>
                 <pre class="code-pre" id="license-text-target" style="color:var(--text-active); font-size:0.85rem; height:350px; overflow-y:auto;"></pre>
               </div>
               <div class="license-builder">
                 <h3 style="margin-top:0;">License Customizer</h3>
-                <div style="display:grid; grid-template-columns:1fr 1fr; gap:15px;">
+                <div class="license-inputs-grid">
                   <div class="input-field">
                     <label>Copyright Year</label>
                     <input type="text" id="license-year-input" value="2026">
@@ -140,15 +163,22 @@
             </div>
           </div>
         </div>
+
+        <!-- RESOURCES TAB -->
         <div class="tab-content" id="tab-resources">
-          <div style="margin-bottom: 20px;">
-            <input type="text" id="resources-search-input" placeholder="Search resources..." style="padding:10px; font-family:var(--font-sans); border-radius:var(--border-radius); border:1px solid var(--border-color); background:var(--bg-panel); color:var(--text-active); width:100%;">
+          <div class="resources-header-banner">
+            <h2>Official Learning Resources</h2>
+            <p>Access hand-picked external documentation, guidelines, and freeCodeCamp courses.</p>
+            <div class="resources-search-wrapper">
+              <input type="text" id="resources-search-input" placeholder="Search resources by category or keyword (e.g. FreeCodeCamp, React)...">
+            </div>
           </div>
-          <div id="resources-grid-target" style="display:grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap:20px;"></div>
+          <div id="resources-grid-target" class="resources-grid"></div>
         </div>
 
+        <!-- LEGAL TAB -->
         <div class="tab-content" id="tab-legal">
-          <div style="display:flex; gap:10px; margin-bottom:20px;">
+          <div class="legal-nav-header">
             <button class="toggle-btn active" data-legal="privacy">Privacy Policy</button>
             <button class="toggle-btn" data-legal="terms">Terms of Service</button>
             <button class="toggle-btn" data-legal="cookies">Cookies Policy</button>
@@ -158,27 +188,29 @@
           <div class="legal-container" id="legal-content-target"></div>
         </div>
       </main>
-    <footer style="background-color:var(--bg-panel); border-top:2px solid var(--border-color); padding:15px; display:flex; justify-content:space-between; align-items:center; font-size:0.85rem; color:var(--text-muted);">
-      <div>© 2026 Kawerify Tech (kawerifytech.com) - All Rights Reserved.</div>
-      <div style="display:flex; gap:15px;">
-        <div id='mock-sound-controls' style='display:none;'></div>
-        <button id='reset-progress-btn' style="background:none; border:none; color:var(--accent-orange); cursor:pointer; font-family:var(--font-sans); font-weight:bold;">🔄 Reset Progress</button>
-        <button id='clear-all-data-btn' style='background:none; border:none; color:#ef4444; font-family:var(--font-sans); cursor:pointer;'>🗑️ Clear Storage</button>
-        <button id='hard-reset-all-btn' style='background:none; border:none; color:#ef4444; font-family:var(--font-sans); cursor:pointer; font-weight:bold;'>⚙️ Factory Hard Reset</button>
-        <span id="help-popover-btn" style="cursor:pointer; text-decoration:underline;">❓ Help & FAQ
-        <div id='help-tooltip' style='display:none;'>Press Alt+L for learn tab</div></span>
+    </div>
+
+    <footer class="footer">
+      <div>© 2026 Kawerify Tech (kawerifytech.com) - All Rights Reserved. Powered by Kawerify Tech Release v2.0</div>
+      <div class="footer-actions">
+        <button id='reset-progress-btn' class="footer-btn text-warning">🔄 Reset Progress</button>
+        <button id='clear-all-data-btn' class="footer-btn text-danger">🗑️ Clear Storage</button>
+        <button id='hard-reset-all-btn' class="footer-btn text-danger bold">⚙️ Factory Hard Reset</button>
+        <span id="help-popover-btn" class="help-popover-trigger">❓ Help & FAQ
+          <div id='help-tooltip' style='display:none;'>Press Alt+L for learn tab</div>
+        </span>
       </div>
-      <div id="help-popover-card" style="display:none; position:absolute; bottom:60px; right:20px; width:300px; background-color:var(--bg-panel); border:2px solid var(--border-color); border-radius:var(--border-radius); padding:15px; box-shadow:0 10px 25px rgba(0,0,0,0.3); z-index:100;">
+      <div id="help-popover-card" class="help-card">
         <h4 style="margin:0 0 10px 0; color:var(--accent-blue);">FAQ & Quick Start</h4>
         <p style="margin:0 0 10px 0; line-height:1.4;">Select 'Kid Mode' for cartoon mascots & easy Lego or Recipe analogies! Code is generated in real-time. Hit 'Send to Playground' to run the outputs directly.</p>
         <button class="btn-action" style="padding:4px 8px; font-size:0.75rem;" id="help-popover-close">Close</button>
       </div>
     </footer>
+  </div>
+  
   <script src="data/curriculum.js"></script>
   <script src="data/templates.js"></script>
   <script src="data/resources.js"></script>
   <script src="app.js"></script>
-  </div>
 </body>
 </html>
-by kawerifytech.com | Powered by Kawerify Tech Release v2.0

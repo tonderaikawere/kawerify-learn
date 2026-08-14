@@ -5,7 +5,7 @@ const appState = {
   theme: "dark",
   mode: "dev", // dev vs kid
   activeTab: "learn",
-  curriculumLang: "react",
+  curriculumLang: null, // default to Alison course catalog dashboard!
   generatorLang: "react",
   generatorTemplateIdx: 0,
   activeLicense: "mit",
@@ -50,7 +50,18 @@ const DOM = {
   resGridTarget: null,
   helpBtn: null,
   helpCard: null,
-  helpCloseBtn: null
+  helpCloseBtn: null,
+  
+  // New dashboard elements cache keys
+  courseSearchInput: null,
+  courseCatalogGrid: null,
+  catalogView: null,
+  detailsView: null,
+  btnBackToCatalog: null,
+  accentPicker: null,
+  audioToggle: null,
+  clearStorageBtn: null,
+  hardResetBtn: null
 };
 
 function cacheDOM() {
@@ -88,6 +99,17 @@ function cacheDOM() {
   DOM.helpBtn = document.getElementById("help-popover-btn");
   DOM.helpCard = document.getElementById("help-popover-card");
   DOM.helpCloseBtn = document.getElementById("help-popover-close");
+  
+  // Cache course dashboard elements
+  DOM.courseSearchInput = document.getElementById("course-search-input");
+  DOM.courseCatalogGrid = document.getElementById("course-catalog-grid");
+  DOM.catalogView = document.getElementById("curriculum-catalog-view");
+  DOM.detailsView = document.getElementById("curriculum-details-view");
+  DOM.btnBackToCatalog = document.getElementById("btn-back-to-catalog");
+  DOM.accentPicker = document.getElementById("accent-picker");
+  DOM.audioToggle = document.getElementById("audio-toggle-checkbox");
+  DOM.clearStorageBtn = document.getElementById("clear-all-data-btn");
+  DOM.hardResetBtn = document.getElementById("hard-reset-all-btn");
 }
 
 function initEventListeners() {
@@ -100,12 +122,33 @@ function initEventListeners() {
   
   DOM.themeToggle.addEventListener("click", toggleTheme);
   DOM.kidToggle.addEventListener("click", toggleKidMode);
-  DOM.currLangSelect.addEventListener("change", (e) => {
-    appState.curriculumLang = e.target.value;
-    renderCurriculum();
-  });
   
-  DOM.lessonSearchInput.addEventListener("input", renderCurriculum);
+  if (DOM.currLangSelect) {
+    DOM.currLangSelect.addEventListener("change", (e) => {
+      appState.curriculumLang = e.target.value;
+      renderCurriculum();
+    });
+  }
+  
+  if (DOM.lessonSearchInput) DOM.lessonSearchInput.addEventListener("input", renderCurriculum);
+  if (DOM.courseSearchInput) DOM.courseSearchInput.addEventListener("input", renderCourseCatalog);
+  
+  if (DOM.btnBackToCatalog) {
+    DOM.btnBackToCatalog.addEventListener("click", () => {
+      appState.curriculumLang = null;
+      saveToLocalStorage();
+      renderCurriculum();
+      playClickSound();
+    });
+  }
+  
+  if (DOM.accentPicker) {
+    DOM.accentPicker.addEventListener("input", (e) => {
+      const color = e.target.value;
+      document.documentElement.style.setProperty('--accent-blue', color);
+      document.documentElement.style.setProperty('--accent-active', color);
+    });
+  }
   
   DOM.genLangSelect.addEventListener("change", (e) => {
     appState.generatorLang = e.target.value;
@@ -143,13 +186,23 @@ function initEventListeners() {
       const doc = btn.getAttribute("data-legal");
       appState.legalDoc = doc;
       renderLegalDoc();
-  renderResources();
+      renderResources();
     });
   });
   
   DOM.resetProgressBtn.addEventListener("click", resetProgress);
+  if (DOM.clearStorageBtn) {
+    DOM.clearStorageBtn.addEventListener("click", () => {
+      if (confirm("Clear local storage cache data?")) {
+        localStorage.clear();
+        alert("Cache cleared!");
+        window.location.reload();
+      }
+    });
+  }
+  if (DOM.hardResetBtn) DOM.hardResetBtn.addEventListener("click", hardResetAll);
+  
   if (DOM.resSearchInput) DOM.resSearchInput.addEventListener("input", renderResources);
-  if (DOM.resSearchInput) DOM.resSearchInput.addEventListener("input", filterResourcesList);
   DOM.helpBtn.addEventListener("click", () => DOM.helpCard.style.display = "block");
   DOM.helpCloseBtn.addEventListener("click", () => DOM.helpCard.style.display = "none");
 }
@@ -208,10 +261,23 @@ function toggleKidMode() {
 
 function renderCurriculum() {
   const langKey = appState.curriculumLang;
+  
+  if (!langKey) {
+    // Show catalog dashboard view, hide detailed lessons view
+    if (DOM.catalogView) DOM.catalogView.style.display = "block";
+    if (DOM.detailsView) DOM.detailsView.style.display = "none";
+    renderCourseCatalog();
+    return;
+  }
+  
+  // Show detailed lessons view, hide catalog view
+  if (DOM.catalogView) DOM.catalogView.style.display = "none";
+  if (DOM.detailsView) DOM.detailsView.style.display = "block";
+  
   const lang = window.curriculum[langKey];
   if (!lang) return;
   
-  const searchVal = DOM.lessonSearchInput.value.toLowerCase();
+  const searchVal = DOM.lessonSearchInput ? DOM.lessonSearchInput.value.toLowerCase() : '';
   
   let html = `
     <div class="mascot-banner">
@@ -283,6 +349,89 @@ function renderCurriculum() {
   renderQuiz();
 }
 
+function renderCourseCatalog() {
+  const target = DOM.courseCatalogGrid;
+  if (!target || !window.curriculum) return;
+  const searchVal = DOM.courseSearchInput ? DOM.courseSearchInput.value.toLowerCase() : '';
+  
+  let html = '';
+  let count = 0;
+  
+  for (const [langKey, lang] of Object.entries(window.curriculum)) {
+    if (langKey === 'faq') continue;
+    
+    // Search course title, mascot, or language key
+    if (searchVal && !lang.title.toLowerCase().includes(searchVal) && !lang.mascot.toLowerCase().includes(searchVal) && !langKey.toLowerCase().includes(searchVal)) {
+      continue;
+    }
+    
+    count++;
+    
+    // Progress calculation
+    const totalLessons = lang.lessons ? lang.lessons.length : 0;
+    let completed = 0;
+    for(let i=0; i<totalLessons; i++) {
+      if (appState.completedLessons[`${langKey}_${i}`]) completed++;
+    }
+    const percent = totalLessons > 0 ? Math.round((completed / totalLessons) * 100) : 0;
+    
+    html += `
+      <div class="course-card" onclick="selectCourse('${langKey}')">
+        <div class="course-card-header">
+          <span class="course-card-mascot" style="color:${lang.color}">${lang.mascotEmoji}</span>
+          <span class="resource-badge" style="background-color:${lang.color}15; color:${lang.color}; border:1px solid ${lang.color}33; font-weight:bold; font-size:0.7rem; padding:4px 8px; border-radius:4px;">${langKey.toUpperCase()}</span>
+        </div>
+        <div>
+          <h3 class="course-card-title">${lang.title}</h3>
+          <p class="course-card-desc">Meet your guide <strong>${lang.mascot}</strong> and learn step-by-step.</p>
+        </div>
+        <div class="course-card-footer">
+          <div class="course-card-progress">
+            <div class="course-card-progress-label">
+              <span>Progress</span>
+              <span>${percent}%</span>
+            </div>
+            <div class="course-card-progress-bar-bg">
+              <div class="course-card-progress-bar" style="width:${percent}%; background-color:${lang.color}"></div>
+            </div>
+          </div>
+          <button class="btn-course-action" style="background-color:${lang.color};">Start Learning</button>
+        </div>
+      </div>
+    `;
+  }
+  
+  if (count === 0) {
+    html = `<div class="no-results-msg" style="grid-column: 1/-1;">No courses matched your search filters.</div>`;
+  }
+  
+  target.innerHTML = html;
+}
+
+window.selectCourse = function(langKey) {
+  appState.curriculumLang = langKey;
+  saveToLocalStorage();
+  renderCurriculum();
+  playClickSound();
+}
+
+function playClickSound() {
+  if (DOM.audioToggle && DOM.audioToggle.checked) {
+    try {
+      const ctx = new (window.AudioContext || window.webkitAudioContext)();
+      const osc = ctx.createOscillator();
+      const gain = ctx.createGain();
+      osc.type = "sine";
+      osc.frequency.setValueAtTime(1000, ctx.currentTime);
+      gain.gain.setValueAtTime(0.03, ctx.currentTime);
+      osc.connect(gain);
+      gain.connect(ctx.destination);
+      osc.start();
+      osc.stop(ctx.currentTime + 0.08);
+    } catch(e) {}
+  }
+}
+
 window.toggleLessonComplete = function(lang, index) {
   const key = `${lang}_${index}`;
   if (appState.completedLessons[key]) {
@@ -290,6 +439,7 @@ window.toggleLessonComplete = function(lang, index) {
   } else {
     appState.completedLessons[key] = true;
     triggerConfetti();
+    playClickSound();
   }
   saveToLocalStorage();
   renderCurriculum();
@@ -773,18 +923,32 @@ function renderResources() {
   let html = '';
   let count = 0;
   
+  const langColorMap = {
+    react: '#0ea5e9',
+    python: '#38bdf8',
+    c: '#64748b',
+    cpp: '#00599c',
+    csharp: '#178600',
+    php: '#4f46e5',
+    javascript: '#eab308',
+    html_css: '#f97316',
+    general: '#10b981',
+    freecodecamp: '#0a0a23'
+  };
+
   for (const [lang, list] of Object.entries(window.resources)) {
     list.forEach(res => {
       if (searchVal && !res.name.toLowerCase().includes(searchVal) && !res.desc.toLowerCase().includes(searchVal) && !lang.toLowerCase().includes(searchVal)) {
         return;
       }
       count++;
+      const badgeCol = langColorMap[lang.toLowerCase()] || 'var(--border-color)';
       html += `
-        <div class="resource-card">
-          <span class="resource-badge">${lang.toUpperCase()}</span>
+        <div class="resource-card" style="border-left: 4px solid ${badgeCol}">
+          <span class="resource-badge" style="background-color:${badgeCol}15; color:${badgeCol}; border:1px solid ${badgeCol}33; font-weight:700;">${lang.toUpperCase()}</span>
           <h4 style="margin: 5px 0 10px 0; font-size:1.15rem;">${res.name}</h4>
-          <p style="margin:0; font-size:0.9rem; color:var(--text-muted); line-height:1.4;">${res.desc}</p>
-          <a href="${res.url}" target="_blank" class="resource-link">🌐 Visit Resource &rarr;</a>
+          <p style="margin:0; font-size:0.9rem; color:var(--text-muted); line-height:1.45;">${res.desc}</p>
+          <a href="${res.url}" target="_blank" class="resource-link" style="color:${badgeCol}; font-weight:700;">🌐 Visit Resource &rarr;</a>
         </div>
       `;
     });
