@@ -930,3 +930,4 @@ function filterResourcesList() {
 // Keyboard listener addition mapping for C# resource keys
 // Custom accent color selection mapper settings selector functions
 // Event triggers updates for C++ select lists change lists
+// Event triggers updates for C# select lists change lists
