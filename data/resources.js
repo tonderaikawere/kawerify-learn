@@ -23,3 +23,7 @@ const resources = {
     { name: 'cppreference C++ Reference', url: 'https://en.cppreference.com/w/cpp', desc: 'STL containers reference, smart pointers, template rules.' },
     { name: 'Learn C++ Guidelines', url: 'https://www.learncpp.com/', desc: 'In-depth steps outlining classes, templates, and compiler optimization.' }
   ],
+  csharp: [
+    { name: 'Microsoft Learn .NET C#', url: 'https://learn.microsoft.com/en-us/dotnet/csharp/', desc: 'Official MS guide outlining namespaces, properties, and assemblies.' },
+    { name: 'C# Programming Yellow Book', url: 'http://www.csharpyellowbook.com/', desc: 'Free detailed textbook mapping variables, lists, and GUI frameworks.' }
+  ],
