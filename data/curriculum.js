@@ -355,3 +355,4 @@ curriculum.faq = [
 // Added C# encapsulation properties set get properties.
 // Added C# integrated queries expressions parameters mapping.
 // Added C# files namespaces resolution addressing lessons.
+// Added C# interactive validation quizzes lists structures.
