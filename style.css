@@ -502,3 +502,4 @@ body.kid-mode .resource-card { border-radius: var(--border-radius-kid); }
 @media(max-width: 600px) { #resources-grid-target { grid-template-columns: 1fr; } }
 #curriculum-lang-select, #generator-lang-select { font-weight: bold; }
 .resource-badge { transition: background-color 0.2s; }
+.resource-card:hover .resource-badge { background-color: var(--accent-blue); color: white; }
