@@ -730,6 +730,38 @@ function renderLicenseText() {
     });
 }
 
+function renderResources() {
+  const target = DOM.resGridTarget;
+  if (!target || !window.resources) return;
+  const searchVal = DOM.resSearchInput ? DOM.resSearchInput.value.toLowerCase() : '';
+  
+  let html = '';
+  let count = 0;
+  
+  for (const [lang, list] of Object.entries(window.resources)) {
+    list.forEach(res => {
+      if (searchVal && !res.name.toLowerCase().includes(searchVal) && !res.desc.toLowerCase().includes(searchVal) && !lang.toLowerCase().includes(searchVal)) {
+        return;
+      }
+      count++;
+      html += `
+        <div class="resource-card">
+          <span class="resource-badge">${lang.toUpperCase()}</span>
+          <h4 style="margin: 5px 0 10px 0; font-size:1.15rem;">${res.name}</h4>
+          <p style="margin:0; font-size:0.9rem; color:var(--text-muted); line-height:1.4;">${res.desc}</p>
+          <a href="${res.url}" target="_blank" class="resource-link">🌐 Visit Resource &rarr;</a>
+        </div>
+      `;
+    });
+  }
+  
+  if (count === 0) {
+    html = `<div class="no-results-msg" style="grid-column: 1/-1;">No resources matched your search filter.</div>`;
+  }
+  
+  target.innerHTML = html;
+}
+
 function renderLegalDoc() {
   const doc = appState.legalDoc;
   const target = DOM.legContentTarget;
