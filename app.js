@@ -429,7 +429,7 @@ function renderGenerator() {
   target.innerHTML = html;
   
   // Set Filename
-  const ext = langKey === "react" ? "jsx" : langKey === "python" ? "py" : langKey === "c" ? "c" : langKey === "php" ? "php" : langKey === "javascript" ? "js" : "html";
+  const ext = langKey === "react" ? "jsx" : langKey === "python" ? "py" : langKey === "c" ? "c" : langKey === "cpp" ? "cpp" : langKey === "csharp" ? "cs" : langKey === "php" ? "php" : langKey === "javascript" ? "js" : "html";
   DOM.genFileName.innerText = `component.${ext}`;
   
   compileGeneratedCode();
