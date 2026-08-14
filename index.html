@@ -133,6 +133,13 @@
             </div>
           </div>
         </div>
+        <div class="tab-content" id="tab-resources">
+          <div style="margin-bottom: 20px;">
+            <input type="text" id="resources-search-input" placeholder="Search resources..." style="padding:10px; font-family:var(--font-sans); border-radius:var(--border-radius); border:1px solid var(--border-color); background:var(--bg-panel); color:var(--text-active); width:100%;">
+          </div>
+          <div id="resources-grid-target" style="display:grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap:20px;"></div>
+        </div>
+
         <div class="tab-content" id="tab-legal">
           <div style="display:flex; gap:10px; margin-bottom:20px;">
             <button class="toggle-btn active" data-legal="privacy">Privacy Policy</button>
