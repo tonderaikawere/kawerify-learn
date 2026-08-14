@@ -916,3 +916,7 @@ mascotSVGs.cpp = `<svg width='50' height='50' viewBox='0 0 100 100'><circle cx='
 mascotSVGs.csharp = `<svg width='50' height='50' viewBox='0 0 100 100'><circle cx='50' cy='50' r='40' fill='#178600'/><text x='50' y='55' font-size='20' font-weight='bold' fill='white' text-anchor='middle'>C#</text></svg>`;
 
 // Added custom local storage state indicators for resources parameters.
+
+function filterResourcesList() {
+  renderResources();
+}
