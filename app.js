@@ -147,6 +147,8 @@ function initEventListeners() {
   });
   
   DOM.resetProgressBtn.addEventListener("click", resetProgress);
+  if (DOM.resSearchInput) DOM.resSearchInput.addEventListener("input", renderResources);
+  if (DOM.resSearchInput) DOM.resSearchInput.addEventListener("input", filterResourcesList);
   DOM.helpBtn.addEventListener("click", () => DOM.helpCard.style.display = "block");
   DOM.helpCloseBtn.addEventListener("click", () => DOM.helpCard.style.display = "none");
 }
