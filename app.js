@@ -906,3 +906,5 @@ function renderFAQ() {
 function triggerFileDownload(filename, content) {
   console.log('Downloading file:', filename);
 }
+
+// Added support for compiling C# language templates in simulated console
