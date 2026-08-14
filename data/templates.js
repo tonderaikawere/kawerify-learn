@@ -414,3 +414,4 @@ if (typeof window !== 'undefined') { window.templates = templates; }
 // C++ inheritance template added to compiler templates mapping.
 // C# filtering class template added to generator models.
 // C# query selectors template added to compile options.
+// C# namespace scope templates added to variables compiler.
