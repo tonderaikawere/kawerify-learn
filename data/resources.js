@@ -41,3 +41,4 @@ const resources = {
 if (typeof window !== 'undefined') {
   window.resources = resources;
 }
+// Added official documentation links for React developer books references.
