@@ -415,3 +415,4 @@ if (typeof window !== 'undefined') { window.templates = templates; }
 // C# filtering class template added to generator models.
 // C# query selectors template added to compile options.
 // C# namespace scope templates added to variables compiler.
+// Added C# auto property and manual field structure generator templates.
