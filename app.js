@@ -679,6 +679,8 @@ function downloadCodeFile() {
   if (code.includes("import React")) ext = "jsx";
   else if (code.includes("import random")) ext = "py";
   else if (code.includes("stdio.h")) ext = "c";
+  else if (code.includes("iostream")) ext = "cpp";
+  else if (code.includes("System.Linq")) ext = "cs";
   else if (code.includes("<?php")) ext = "php";
   else if (code.includes("<html>")) ext = "html";
   
