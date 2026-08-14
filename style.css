@@ -466,3 +466,8 @@ body.kid-mode .btn-action {
   padding: 20px;
   transition: all 0.3s ease;
 }
+.resource-card:hover {
+  transform: translateY(-5px);
+  border-color: var(--accent-blue);
+  box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+}
