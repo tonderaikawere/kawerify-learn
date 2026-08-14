@@ -12,7 +12,8 @@ const appState = {
   licenseYear: "2026",
   licenseOwner: "Kawerify Tech (kawerifytech.com)",
   legalDoc: "privacy",
-  completedLessons: {} // maps lang_lesson => boolean
+  completedLessons: {}, // maps lang_lesson => boolean
+  unlockedBadges: [] // persists user achievements
 };
 
 
@@ -350,6 +351,7 @@ function renderCurriculum() {
 }
 
 function renderCourseCatalog() {
+  renderAchievementsShelf();
   const target = DOM.courseCatalogGrid;
   if (!target || !window.curriculum) return;
   const searchVal = DOM.courseSearchInput ? DOM.courseSearchInput.value.toLowerCase() : '';
@@ -444,6 +446,7 @@ window.toggleLessonComplete = function(lang, index) {
   saveToLocalStorage();
   renderCurriculum();
   renderResources();
+  checkAndUnlockBadges();
 }
 
 let activeQuizAnswers = {};
@@ -507,6 +510,7 @@ window.answerQuiz = function(langKey, qIdx, oIdx) {
     triggerConfetti();
   }
   renderQuiz();
+  checkAndUnlockBadges();
 }
 
 function triggerConfetti() {
@@ -611,6 +615,9 @@ window.compileGeneratedCode = function() {
   
   const code = activeTemp.compile(params);
   DOM.genCodeTarget.innerText = code;
+  if (typeof unlockBadge === 'function') {
+    unlockBadge('builder');
+  }
 }
 
 function copyToClipboard(text) {
@@ -638,6 +645,9 @@ function sendToPlayground() {
 }
 
 function runPlaygroundCode() {
+  if (typeof unlockBadge === 'function') {
+    unlockBadge('sandbox_hero');
+  }
   const code = DOM.playCodeEditor.value;
   
   // Decide how to run based on content
@@ -1042,6 +1052,9 @@ window.addEventListener("DOMContentLoaded", () => {
   renderLicenseText();
   renderLegalDoc();
   renderResources();
+  if (typeof checkAndUnlockBadges === 'function') {
+    checkAndUnlockBadges();
+  }
 });
 
 // Added custom SVG mascot dictionary mapping for React
@@ -1112,5 +1125,156 @@ function hardResetAll() {
   if(confirm('Reset entire environment stats?')) {
     localStorage.clear();
     window.location.reload();
+  }
+}
+
+// Achievements Badges System Data
+const badgesMetadata = [
+  { id: 'graduate', name: 'Graduate Medal', desc: 'Pass any curriculum quiz challenge', icon: '🎓' },
+  { id: 'react_master', name: 'React Alchemist', desc: 'Mark all React lessons as read', icon: '⚛️' },
+  { id: 'python_master', name: 'Python Charmer', desc: 'Mark all Python lessons as read', icon: '🐍' },
+  { id: 'c_master', name: 'C-Family Knight', desc: 'Complete C, C++, or C# lessons', icon: '💻' },
+  { id: 'web_master', name: 'Web Wizard', desc: 'Complete HTML & CSS lessons', icon: '🌐' },
+  { id: 'builder', name: 'Code Summoner', desc: 'Generate code using templates', icon: '⚡' },
+  { id: 'sandbox_hero', name: 'Sandbox Hero', desc: 'Run code in the playground terminal', icon: '🛝' },
+  { id: 'all_rounder', name: 'All Rounder', desc: 'Unlock at least 4 other badges', icon: '🏆' }
+];
+
+function checkAndUnlockBadges() {
+  if (!appState.unlockedBadges) appState.unlockedBadges = [];
+  
+  // 1. graduate: quiz question validation
+  let quizSuccess = false;
+  if (typeof activeQuizAnswers !== 'undefined') {
+    for (const [key, answeredIdx] of Object.entries(activeQuizAnswers)) {
+      const parts = key.split('_');
+      const langKey = parts[0];
+      const qIdx = parseInt(parts[1]);
+      const langObj = window.curriculum[langKey];
+      if (langObj && langObj.quizzes && langObj.quizzes[qIdx]) {
+        if (answeredIdx === langObj.quizzes[qIdx].correct) {
+          quizSuccess = true;
+          break;
+        }
+      }
+    }
+  }
+  if (quizSuccess) unlockBadge('graduate');
+  
+  // 2. react_master
+  if (window.curriculum['react']) {
+    const reactLessons = window.curriculum['react'].lessons.length;
+    let reactCompleted = 0;
+    for (let i = 0; i < reactLessons; i++) {
+      if (appState.completedLessons[`react_${i}`]) reactCompleted++;
+    }
+    if (reactLessons > 0 && reactCompleted === reactLessons) unlockBadge('react_master');
+  }
+  
+  // 3. python_master
+  if (window.curriculum['python']) {
+    const pythonLessons = window.curriculum['python'].lessons.length;
+    let pythonCompleted = 0;
+    for (let i = 0; i < pythonLessons; i++) {
+      if (appState.completedLessons[`python_${i}`]) pythonCompleted++;
+    }
+    if (pythonLessons > 0 && pythonCompleted === pythonLessons) unlockBadge('python_master');
+  }
+  
+  // 4. c_master
+  const cLanguages = ['c', 'cpp', 'csharp'];
+  let cCompleted = false;
+  cLanguages.forEach(l => {
+    if (window.curriculum[l]) {
+      const lessonsCount = window.curriculum[l].lessons.length;
+      let completed = 0;
+      for (let i = 0; i < lessonsCount; i++) {
+        if (appState.completedLessons[`${l}_${i}`]) completed++;
+      }
+      if (lessonsCount > 0 && completed === lessonsCount) cCompleted = true;
+    }
+  });
+  if (cCompleted) unlockBadge('c_master');
+  
+  // 5. web_master
+  if (window.curriculum['html_css']) {
+    const htmlLessons = window.curriculum['html_css'].lessons.length;
+    let htmlCompleted = 0;
+    for (let i = 0; i < htmlLessons; i++) {
+      if (appState.completedLessons[`html_css_${i}`]) htmlCompleted++;
+    }
+    if (htmlLessons > 0 && htmlCompleted === htmlLessons) unlockBadge('web_master');
+  }
+  
+  // 6. all_rounder
+  const otherBadgesCount = appState.unlockedBadges.filter(b => b !== 'all_rounder').length;
+  if (otherBadgesCount >= 4) unlockBadge('all_rounder');
+}
+
+function unlockBadge(id) {
+  if (!appState.unlockedBadges) appState.unlockedBadges = [];
+  if (appState.unlockedBadges.includes(id)) return;
+  
+  appState.unlockedBadges.push(id);
+  saveToLocalStorage();
+  
+  const badge = badgesMetadata.find(b => b.id === id);
+  if (badge) {
+    showSystemNotification(`🏆 Achievement Unlocked: ${badge.name}!`);
+    triggerConfetti();
+    playUnlockSound();
+    if (!appState.curriculumLang) {
+      renderCourseCatalog();
+    }
+  }
+}
+
+function renderAchievementsShelf() {
+  const shelf = document.getElementById("achievements-shelf");
+  if (!shelf) return;
+  
+  let html = '';
+  badgesMetadata.forEach(badge => {
+    const isUnlocked = appState.unlockedBadges && appState.unlockedBadges.includes(badge.id);
+    html += `
+      <div class="achievement-card ${isUnlocked ? 'unlocked' : 'locked'}">
+        <span class="achievement-card-icon">${badge.icon}</span>
+        <div class="achievement-card-info">
+          <span class="achievement-card-name">${badge.name}</span>
+          <span class="achievement-card-desc">${badge.desc}</span>
+          <span class="achievement-card-status ${isUnlocked ? 'unlocked-txt' : 'locked-txt'}">
+            ${isUnlocked ? '🔓 Unlocked' : '🔒 Locked'}
+          </span>
+        </div>
+      </div>
+    `;
+  });
+  
+  shelf.innerHTML = html;
+}
+
+function playUnlockSound() {
+  if (DOM.audioToggle && DOM.audioToggle.checked) {
+    try {
+      const ctx = new (window.AudioContext || window.webkitAudioContext)();
+      const now = ctx.currentTime;
+      
+      const playNote = (freq, time, duration) => {
+        const osc = ctx.createOscillator();
+        const gain = ctx.createGain();
+        osc.type = "sine";
+        osc.frequency.setValueAtTime(freq, time);
+        gain.gain.setValueAtTime(0.04, time);
+        gain.gain.exponentialRampToValueAtTime(0.001, time + duration);
+        osc.connect(gain);
+        gain.connect(ctx.destination);
+        osc.start(time);
+        osc.stop(time + duration);
+      };
+      
+      playNote(523.25, now, 0.15); // C5
+      playNote(659.25, now + 0.12, 0.15); // E5
+      playNote(783.99, now + 0.24, 0.35); // G5
+    } catch(e) {}
   }
 }

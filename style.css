@@ -51,16 +51,32 @@ body {
 }
 .app-container {
   display: grid;
-  grid-template-rows: 70px 1fr 50px;
-  min-height: 100vh;
+  grid-template-columns: 260px 1fr;
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+.right-pane {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  overflow: hidden;
+  box-sizing: border-box;
 }
 .header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0 20px;
+  padding: 0 30px;
   background-color: var(--bg-panel);
   border-bottom: 2px solid var(--border-color);
+  height: 70px;
+  flex-shrink: 0;
+  box-sizing: border-box;
+}
+.header-logo-mobile {
+  display: none; /* Only shown on mobile bottom-tab bar view */
 }
 .logo-container {
   display: flex;
@@ -96,32 +112,65 @@ body.kid-mode .toggle-btn {
   box-shadow: 0 4px 0 var(--text-active);
 }
 .main-body {
-  display: grid;
-  grid-template-columns: 240px 1fr;
+  display: contents; /* Grid layout managed on app-container level */
 }
 .sidebar {
   background-color: var(--bg-panel);
   border-right: 2px solid var(--border-color);
-  padding: 20px 10px;
+  padding: 25px 15px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100vh;
+  box-sizing: border-box;
+  overflow-y: auto;
+}
+.sidebar-brand {
+  margin-bottom: 30px;
+}
+.sidebar-logo {
+  font-weight: 800;
+  font-size: 1.45rem;
+  color: var(--accent-blue);
+  letter-spacing: -0.5px;
+  display: block;
+}
+.sidebar-logo-sub {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  display: block;
+  margin-top: 4px;
+}
+.sidebar-nav {
   display: flex;
   flex-direction: column;
   gap: 8px;
+  flex-grow: 1;
+}
+.sidebar-footer-info {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  opacity: 0.7;
+  padding-top: 20px;
+  border-top: 1px solid var(--border-color);
 }
 .nav-item {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 12px;
   padding: 12px 15px;
   background: none;
   border: none;
   color: var(--text-muted);
   font-family: var(--font-sans);
-  font-size: 1rem;
+  font-size: 0.95rem;
   font-weight: 600;
   text-align: left;
   border-radius: var(--border-radius);
   cursor: pointer;
   transition: all 0.2s ease;
+  width: 100%;
+  box-sizing: border-box;
 }
 .nav-item.active, .nav-item:hover {
   background-color: var(--bg-active);
@@ -134,6 +183,9 @@ body.kid-mode .nav-item.active {
 .workspace {
   padding: 30px;
   overflow-y: auto;
+  flex-grow: 1;
+  background-color: var(--bg-active);
+  box-sizing: border-box;
 }
 .tab-content {
   display: none;
@@ -820,7 +872,179 @@ body.csharp-theme { --accent-active: var(--accent-csharp); }
   gap: 24px;
 }
 .main-body {
+  display: contents; /* Managed on container level */
+}
+
+/* Achievements / Badges Panel */
+.achievements-section {
+  margin-bottom: 30px;
+  background-color: var(--bg-panel);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  padding: 20px;
+}
+.achievements-section-title {
+  margin: 0 0 15px 0;
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--accent-blue);
+}
+.achievements-grid {
   display: grid;
-  grid-template-columns: 240px 1fr;
-  min-height: 0;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 15px;
+}
+.achievement-card {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background-color: var(--bg-active);
+  border: 1px solid var(--border-color);
+  border-radius: 10px;
+  padding: 12px;
+  transition: all 0.2s ease;
+}
+.achievement-card.locked {
+  opacity: 0.45;
+  filter: grayscale(1);
+}
+.achievement-card.unlocked {
+  opacity: 1;
+  filter: none;
+  border-color: var(--accent-green);
+  background: linear-gradient(135deg, var(--bg-panel), rgba(16, 185, 129, 0.05));
+  box-shadow: 0 4px 6px rgba(16, 185, 129, 0.05);
+}
+.achievement-card-icon {
+  font-size: 1.8rem;
+  flex-shrink: 0;
+}
+.achievement-card-info {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.achievement-card-name {
+  font-weight: 700;
+  font-size: 0.85rem;
+  color: var(--text-active);
+}
+.achievement-card-desc {
+  font-size: 0.7rem;
+  color: var(--text-muted);
+  line-height: 1.3;
+}
+.achievement-card-status {
+  font-size: 0.65rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  margin-top: 4px;
+}
+.achievement-card-status.unlocked-txt {
+  color: var(--accent-green);
+}
+.achievement-card-status.locked-txt {
+  color: var(--text-muted);
+}
+
+/* Mobile responsive layout fixes and Bottom Navigation Bar for Mobile */
+@media(max-width: 900px) {
+  .app-container {
+    grid-template-columns: 1fr;
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    width: 100vw;
+    overflow: hidden;
+  }
+  .right-pane {
+    height: calc(100vh - 60px);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+  }
+  .sidebar {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100vw;
+    height: 60px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    background-color: var(--bg-panel);
+    border-top: 2px solid var(--border-color);
+    border-right: none;
+    padding: 0;
+    z-index: 1000;
+    overflow: hidden;
+    height: 60px !important;
+  }
+  .sidebar-brand, .sidebar-footer-info {
+    display: none !important;
+  }
+  .sidebar-nav {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    height: 100%;
+    justify-content: space-around;
+    align-items: center;
+    gap: 0;
+  }
+  .nav-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    padding: 5px 0;
+    font-size: 0.65rem;
+    font-weight: 700;
+    height: 100%;
+    flex-grow: 1;
+    border-radius: 0;
+    border: none;
+    background: none;
+    color: var(--text-muted);
+    text-align: center;
+  }
+  .nav-item.active {
+    background-color: var(--bg-active);
+    color: var(--text-active);
+    border-top: 3px solid var(--accent-blue);
+    box-shadow: none;
+  }
+  .nav-item .nav-text {
+    display: block;
+    font-size: 0.6rem;
+  }
+  .header {
+    height: auto;
+    min-height: 60px;
+    flex-shrink: 0;
+    flex-wrap: wrap;
+    padding: 10px 15px;
+    gap: 10px;
+  }
+  .header-logo-mobile {
+    display: flex;
+    flex-direction: column;
+  }
+  .workspace {
+    padding: 15px;
+    flex-grow: 1;
+    overflow-y: auto;
+  }
+  .footer {
+    display: none !important; /* Hide footer on mobile screens to save space */
+  }
+  .playground-split {
+    grid-template-columns: 1fr;
+    height: auto;
+  }
+  .license-grid {
+    grid-template-columns: 1fr;
+  }
 }
