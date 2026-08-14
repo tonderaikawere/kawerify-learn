@@ -491,3 +491,7 @@ body.kid-mode .btn-action {
   font-weight: 600;
 }
 #resources-search-input { outline: none; border-color: var(--border-color); }
+:root {
+  --accent-cpp: #00599c;
+  --accent-csharp: #178600;
+}
