@@ -457,3 +457,12 @@ body.kid-mode .btn-action {
 .terminal-line span { font-weight: bold; }
 
 #system-alert-banner { background: #1e293b; color: white; padding: 12px; border-radius: 6px; border: 1px solid var(--accent-blue); }
+
+/* Resources layout panels */
+.resource-card {
+  background-color: var(--bg-panel);
+  border: 2px solid var(--border-color);
+  border-radius: var(--border-radius);
+  padding: 20px;
+  transition: all 0.3s ease;
+}
