@@ -15,3 +15,7 @@ const resources = {
     { name: 'Python.org Documentation', url: 'https://docs.python.org/3/', desc: 'Official index for Python variables, standard libraries, and scopes.' },
     { name: 'Real Python Tutorials', url: 'https://realpython.com', desc: 'Deep dive articles mapping web frameworks and CLI structures.' }
   ],
+  c: [
+    { name: 'cppreference C reference', url: 'https://en.cppreference.com/w/c', desc: 'Standard C standard libraries, pointers, and memory maps.' },
+    { name: 'ISO C Standard details', url: 'https://www.iso.org/standard/74528.html', desc: 'C standard language syntax committee documents.' }
+  ],
