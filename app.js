@@ -933,3 +933,4 @@ function filterResourcesList() {
 // Event triggers updates for C# select lists change lists
 // Local storage system resets purge actions callbacks
 // Help popover configurations descriptions additions for C++ and C#
+// Added dynamic evaluation compiler functions for C++ vectors templates.
