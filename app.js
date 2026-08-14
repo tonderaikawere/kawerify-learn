@@ -46,6 +46,8 @@ const DOM = {
   legDocBtns: [],
   legContentTarget: null,
   resetProgressBtn: null,
+  resSearchInput: null,
+  resGridTarget: null,
   helpBtn: null,
   helpCard: null,
   helpCloseBtn: null
