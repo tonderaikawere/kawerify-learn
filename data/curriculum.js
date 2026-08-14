@@ -309,3 +309,4 @@ curriculum.faq = [
 // Added C++ specific OOP learning curriculum module descriptions.
 // Added C++ STL Vector collections details and kid-friendly analogy.
 // Added C++ classes hierarchical inheritance scope lessons.
+// Added C++ standard syntax review quizzes answers mapping.
