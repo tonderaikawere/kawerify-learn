@@ -292,6 +292,7 @@ window.toggleLessonComplete = function(lang, index) {
   }
   saveToLocalStorage();
   renderCurriculum();
+  renderResources();
 }
 
 let activeQuizAnswers = {};
