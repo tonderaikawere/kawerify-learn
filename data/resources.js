@@ -45,3 +45,4 @@ if (typeof window !== 'undefined') {
 // Added official documentation links for Python cheat sheets reference tools.
 // Added official documentation links for C++ coding cheat sheets reference tools.
 // Added C# official coding guidelines from Microsoft specifications.
+// Added HTML CSS guidelines from MDN official specifications.
