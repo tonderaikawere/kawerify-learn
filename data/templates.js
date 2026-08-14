@@ -411,3 +411,4 @@ button {
 if (typeof window !== 'undefined') { window.templates = templates; }
 
 // Added template content definitions placeholder comment
+// C++ inheritance template added to compiler templates mapping.
