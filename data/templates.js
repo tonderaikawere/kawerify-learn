@@ -1,4 +1,115 @@
 const templates = {
+    cpp: [
+        {
+            name: "STL Dynamic Vector",
+            description: "Demonstrates inserting and printing dynamic vectors.",
+            params: [
+                { name: "First Item", id: "item1", type: "number", default: 10 },
+                { name: "Second Item", id: "item2", type: "number", default: 20 }
+            ],
+            compile: (p) => `#include <iostream>
+#include <vector>
+
+int main() {
+    std::vector<int> numbers;
+    std::cout << "Packing magic backpack...\\n";
+    numbers.push_back(\${p.item1});
+    numbers.push_back(\${p.item2});
+    numbers.push_back(30);
+    
+    std::cout << "Backpack capacity: " << numbers.size() << "\\n";
+    std::cout << "Items list: ";
+    for (int num : numbers) {
+        std::cout << num << " ";
+    }
+    std::cout << "\\n";
+    return 0;
+}`
+        },
+        {
+            name: "OOP Class Inheritance",
+            description: "Encapsulates robot base blueprints inheriting derived class stats.",
+            params: [
+                { name: "Robot Name", id: "botname", type: "text", default: "Iron Giant" }
+            ],
+            compile: (p) => `#include <iostream>
+#include <string>
+
+class Robot {
+protected:
+    std::string name;
+public:
+    Robot(std::string n) : name(n) {}
+    virtual void speak() {
+        std::cout << "Beep Boop! I am " << name << "\\n";
+    }
+};
+
+class SuperRobot : public Robot {
+public:
+    SuperRobot(std::string n) : Robot(n) {}
+    void speak() override {
+        std::cout << "ZOOM! I am " << name << ", the ultimate defender!\\n";
+    }
+};
+
+int main() {
+    SuperRobot bot("\${p.botname}");
+    bot.speak();
+    return 0;
+}`
+        }
+    ],
+    csharp: [
+        {
+            name: "LINQ Query Filter",
+            description: "Filters collection integer values utilizing LINQ.",
+            params: [
+                { name: "Threshold Value", id: "threshold", type: "number", default: 15 }
+            ],
+            compile: (p) => `using System;
+using System.Linq;
+using System.Collections.Generic;
+
+class Program {
+    static void Main() {
+        List<int> numbers = new List<int> { 5, 10, 15, 20, 25, 30 };
+        Console.WriteLine("LINQ magic wand searching...\\n");
+        
+        var query = from num in numbers
+                    where num > \${p.threshold}
+                    select num;
+                    
+        Console.WriteLine("Filtered results greater than \${p.threshold}:");
+        foreach (var val in query) {
+            Console.WriteLine(val);
+        }
+    }
+}`
+        },
+        {
+            name: "Namespaced Variables Class",
+            description: "Demonstrates C# class scope address resolving.",
+            params: [
+                { name: "Room Number", id: "room", type: "text", default: "RoomA" }
+            ],
+            compile: (p) => `using System;
+
+namespace School.\${p.room} {
+    class Student {
+        public string Name { get; set; } = "Alex";
+    }
+}
+
+class Program {
+    static void Main() {
+        var student = new School.\${p.room}.Student();
+        Console.WriteLine("Address resolved namespace Class...");
+        Console.WriteLine("Found student " + student.Name + " in \${p.room}");
+    }
+}`
+        }
+    ],
     react: [
         {
             name: "Interactive Click Counter",
