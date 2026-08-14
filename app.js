@@ -666,7 +666,7 @@ function simulateTerminal(lang, code) {
       }
       DOM.playTerminalBody.appendChild(div);
       i++;
-      setTimeout(printNextLine, 600);
+      setTimeout(printNextLine, 350);
     }
   }
   printNextLine();
