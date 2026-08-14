@@ -509,3 +509,4 @@ body.cpp-theme { --accent-active: var(--accent-cpp); }
 
 /* C# theme color accent overrides */
 body.csharp-theme { --accent-active: var(--accent-csharp); }
+#audio-toggle-checkbox { cursor: pointer; }
