@@ -261,6 +261,48 @@ if (typeof window !== 'undefined') { window.curriculum = curriculum; }
 // Curriculum revision step 46 for javascript
 // Curriculum revision step 47 for html_css
 
+curriculum.cpp = {
+    cpp: {
+        title: "C++ Language",
+        mascot: "Captain CPlus",
+        mascotEmoji: "🦾",
+        color: "var(--accent-cpp, #00599c)",
+        lessons: [
+            {
+                title: "Classes & Blueprints",
+                kid: "C++ is like having a toy factory! A **Class** is the blueprint for a toy robot. It tells the factory what parts the robot has (variables) and what it can do (functions). When you build a robot from the blueprint, it is called an **Object**!",
+                dev: "C++ is an object-oriented programming language. A class is a user-defined type that acts as a blueprint for objects, encapsulating data members (attributes) and member functions (behaviors) under access specifiers."
+            },
+            {
+                title: "STL Vectors (Magic Backpack)",
+                kid: "Vectors are like magic expandable backpacks! In C, a box only holds a fixed number of toys. But a C++ **Vector** grows automatically as you pack more toys into it using code like `push_back(toy)`!",
+                dev: "The Standard Template Library (STL) vector is a sequence container representing a dynamic array. It manages memory automatically, resizing its storage capacity when elements are added using `push_back()`."
+            },
+            {
+                title: "Inheritance (Family Tree)",
+                kid: "Inheritance is like getting your dad's eyes! If you make a general robot blueprint, and then make a super-robot blueprint that inherits from it, the super-robot automatically gets all the functions of the basic robot!",
+                dev: "Inheritance is a core OOP concept where a derived class inherits properties and behaviors from a base class. It supports code reusability and hierarchical classifications using access specifiers."
+            }
+        ],
+        quizzes: [
+            {
+                q: "What is an Object in C++?",
+                a: ["An instance of a Class blueprint", "A type of memory pointer", "A function syntax compiler"],
+                correct: 0,
+                kidFeedback: "Hooray! An object is built directly from your blueprint!",
+                devFeedback: "Correct. An object is an instantiation of a class allocating memory in the program."
+            },
+            {
+                q: "How do you add elements to a Vector?",
+                a: ["vector.add(item)", "vector.push_back(item)", "vector.insert_last(item)"],
+                correct: 1,
+                kidFeedback: "Awesome! push_back packs a new toy into your backpack!",
+                devFeedback: "Correct. `push_back()` is the standard STL method to insert elements at the end."
+            }
+        ]
+    },
+};
+
 curriculum.faq = [
   { q: 'Is this platform really free?', a: 'Yes! It is completely free with no restrictions.' }
 ];
