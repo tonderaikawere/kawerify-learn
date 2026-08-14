@@ -31,3 +31,8 @@ const resources = {
     { name: 'PHP.net Official Manual', url: 'https://www.php.net/manual/en/', desc: 'Official documentation detailing superglobals, form actions, and SQL connectors.' },
     { name: 'W3Schools PHP reference', url: 'https://www.w3schools.com/php/', desc: 'Quick reference containing syntax guides and standard forms.' }
   ],
+  freecodecamp: [
+    { name: 'freeCodeCamp Website', url: 'https://www.freecodecamp.org/', desc: 'Free web certificates, algorithm challenges, and databases tutorials.' },
+    { name: 'freeCodeCamp C++ Video', url: 'https://www.youtube.com/watch?v=vLnPwxZdW4Y', desc: 'Complete 31-hour video course on basic syntax and STL.' },
+    { name: 'freeCodeCamp C# Video', url: 'https://www.youtube.com/watch?v=GhQdlIFylQ8', desc: 'Comprehensive 4-hour video tutorial mapping objects.' }
+  ]
