@@ -935,3 +935,11 @@ function filterResourcesList() {
 // Help popover configurations descriptions additions for C++ and C#
 // Added dynamic evaluation compiler functions for C++ vectors templates.
 // Added dynamic evaluation compiler functions for C# properties templates.
+
+function showSystemNotification(msg) {
+  const banner = document.getElementById('system-alert-banner');
+  if(!banner) return;
+  banner.innerText = msg;
+  banner.style.display = 'block';
+  setTimeout(() => banner.style.display = 'none', 2500);
+}
