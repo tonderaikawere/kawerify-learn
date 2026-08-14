@@ -943,3 +943,10 @@ function showSystemNotification(msg) {
   banner.style.display = 'block';
   setTimeout(() => banner.style.display = 'none', 2500);
 }
+
+function hardResetAll() {
+  if(confirm('Reset entire environment stats?')) {
+    localStorage.clear();
+    window.location.reload();
+  }
+}
