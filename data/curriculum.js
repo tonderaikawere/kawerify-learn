@@ -306,3 +306,4 @@ curriculum.cpp = {
 curriculum.faq = [
   { q: 'Is this platform really free?', a: 'Yes! It is completely free with no restrictions.' }
 ];
+// Added C++ specific OOP learning curriculum module descriptions.
