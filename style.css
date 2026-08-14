@@ -499,3 +499,4 @@ body.kid-mode .resource-card { border-radius: var(--border-radius-kid); }
 .no-results-msg { text-align: center; color: var(--text-muted); padding: 30px; font-weight: 500; }
 .terminal-line .cpp-output { color: #facc15; }
 .terminal-line .csharp-output { color: #a855f7; }
+@media(max-width: 600px) { #resources-grid-target { grid-template-columns: 1fr; } }
