@@ -513,3 +513,4 @@ body.csharp-theme { --accent-active: var(--accent-csharp); }
 #system-error-banner { background: #ef4444; color: white; padding: 12px; border-radius: 6px; }
 #hard-reset-all-btn:hover { text-decoration: underline; color: #b91c1c !important; }
 .playground-editor a { text-decoration: none; }
+@media(max-width: 480px) { .header { height: auto; flex-direction: column; padding: 10px; } }
