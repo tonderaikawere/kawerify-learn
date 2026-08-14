@@ -143,6 +143,7 @@ function initEventListeners() {
       const doc = btn.getAttribute("data-legal");
       appState.legalDoc = doc;
       renderLegalDoc();
+  renderResources();
     });
   });
   
@@ -842,6 +843,7 @@ window.addEventListener("DOMContentLoaded", () => {
   renderLicenseList();
   renderLicenseText();
   renderLegalDoc();
+  renderResources();
 });
 
 // Added custom SVG mascot dictionary mapping for React
