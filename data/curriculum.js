@@ -357,3 +357,4 @@ curriculum.faq = [
 // Added C# files namespaces resolution addressing lessons.
 // Added C# interactive validation quizzes lists structures.
 // Lesson update: Added vectors sort exercises mapping examples.
+// Lesson update: Added namespaces directory import structure guidelines.
