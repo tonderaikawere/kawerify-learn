@@ -924,3 +924,5 @@ mascotSVGs.csharp = `<svg width='50' height='50' viewBox='0 0 100 100'><circle c
 function filterResourcesList() {
   renderResources();
 }
+
+// C# quiz question parser handler mapping checker utility function
