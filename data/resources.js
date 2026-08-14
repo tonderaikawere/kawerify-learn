@@ -36,3 +36,8 @@ const resources = {
     { name: 'freeCodeCamp C++ Video', url: 'https://www.youtube.com/watch?v=vLnPwxZdW4Y', desc: 'Complete 31-hour video course on basic syntax and STL.' },
     { name: 'freeCodeCamp C# Video', url: 'https://www.youtube.com/watch?v=GhQdlIFylQ8', desc: 'Comprehensive 4-hour video tutorial mapping objects.' }
   ]
+};
+
+if (typeof window !== 'undefined') {
+  window.resources = resources;
+}
