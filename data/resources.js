@@ -19,3 +19,7 @@ const resources = {
     { name: 'cppreference C reference', url: 'https://en.cppreference.com/w/c', desc: 'Standard C standard libraries, pointers, and memory maps.' },
     { name: 'ISO C Standard details', url: 'https://www.iso.org/standard/74528.html', desc: 'C standard language syntax committee documents.' }
   ],
+  cpp: [
+    { name: 'cppreference C++ Reference', url: 'https://en.cppreference.com/w/cpp', desc: 'STL containers reference, smart pointers, template rules.' },
+    { name: 'Learn C++ Guidelines', url: 'https://www.learncpp.com/', desc: 'In-depth steps outlining classes, templates, and compiler optimization.' }
+  ],
