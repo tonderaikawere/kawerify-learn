@@ -7,3 +7,7 @@ const resources = {
     { name: 'Javascript.info', url: 'https://javascript.info/', desc: 'Modern tutorial outlining complex closures, scopes, and properties.' },
     { name: 'MDN Javascript Guide', url: 'https://developer.mozilla.org/en-US/docs/Web/JavaScript', desc: 'Official API documentation mapping browser APIs.' }
   ],
+  react: [
+    { name: 'React Official Docs', url: 'https://react.dev', desc: 'Official React website outlining hooks and modern JSX rules.' },
+    { name: 'Beta React docs', url: 'https://react.dev/reference/react', desc: 'Detailed component references and standard hook APIs.' }
+  ],
