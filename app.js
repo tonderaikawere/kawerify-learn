@@ -932,3 +932,4 @@ function filterResourcesList() {
 // Event triggers updates for C++ select lists change lists
 // Event triggers updates for C# select lists change lists
 // Local storage system resets purge actions callbacks
+// Help popover configurations descriptions additions for C++ and C#
