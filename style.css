@@ -503,3 +503,6 @@ body.kid-mode .resource-card { border-radius: var(--border-radius-kid); }
 #curriculum-lang-select, #generator-lang-select { font-weight: bold; }
 .resource-badge { transition: background-color 0.2s; }
 .resource-card:hover .resource-badge { background-color: var(--accent-blue); color: white; }
+
+/* C++ theme color accent overrides */
+body.cpp-theme { --accent-active: var(--accent-cpp); }
