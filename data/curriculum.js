@@ -353,3 +353,4 @@ curriculum.faq = [
 // Added C++ classes hierarchical inheritance scope lessons.
 // Added C++ standard syntax review quizzes answers mapping.
 // Added C# encapsulation properties set get properties.
+// Added C# integrated queries expressions parameters mapping.
