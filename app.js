@@ -555,6 +555,10 @@ function runPlaygroundCode() {
     doc.open();
     doc.write(htmlContent);
     doc.close();
+  } else if (code.includes("iostream") || code.includes("class Robot")) {
+    simulateTerminal("cpp", code);
+  } else if (code.includes("System.Linq") || code.includes("School.")) {
+    simulateTerminal("csharp", code);
   } else if (code.includes("import random") || code.includes("def play_guessing_game") || code.includes("def calculate")) {
     // Python simulation
     simulateTerminal("python", code);
