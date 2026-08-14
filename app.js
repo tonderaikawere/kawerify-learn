@@ -610,6 +610,31 @@ function simulateTerminal(lang, code) {
       lines.append({ text: "Sorting array...", type: "out" });
       lines.append({ text: "Sorted array result: 5 12 23 54 89", type: "out" });
     }
+  } else if (lang === "cpp") {
+    lines.append({ text: "$ g++ main.cpp -o main && ./main", type: "input" });
+    if (code.includes("Robot")) {
+      const botName = code.match(/SuperRobot bot\("(.*?)"\)/) || ["", "Iron Giant"];
+      lines.append({ text: "Compiling class inheritance structures...", type: "out" });
+      lines.append({ text: `ZOOM! I am ${botName[1]}, the ultimate defender!`, type: "out" });
+    } else {
+      lines.append({ text: "Packing magic backpack...", type: "out" });
+      lines.append({ text: "Backpack capacity: 3", type: "out" });
+      lines.append({ text: "Items list: 10 20 30", type: "out" });
+    }
+  } else if (lang === "csharp") {
+    lines.append({ text: "$ dotnet run", type: "input" });
+    if (code.includes("LINQ")) {
+      const val = code.match(/where num > (\d+)/) || [0, 15];
+      lines.append({ text: "LINQ magic wand searching...", type: "out" });
+      lines.append({ text: `Filtered results greater than ${val[1]}:`, type: "out" });
+      if (parseInt(val[1]) < 20) lines.append({ text: "20", type: "out" });
+      if (parseInt(val[1]) < 25) lines.append({ text: "25", type: "out" });
+      lines.append({ text: "30", type: "out" });
+    } else {
+      const room = code.match(/School\.(.*?)\.Student/) || ["", "RoomA"];
+      lines.append({ text: "Address resolved namespace Class...", type: "out" });
+      lines.append({ text: `Found student Alex in ${room[1]}`, type: "out" });
+    }
   } else if (lang === "php") {
     lines.append({ text: "$ php main.php", type: "input" });
     if (code.includes("password_hash")) {
