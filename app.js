@@ -83,6 +83,8 @@ function cacheDOM() {
   DOM.legDocBtns = document.querySelectorAll("[data-legal]");
   DOM.legContentTarget = document.getElementById("legal-content-target");
   DOM.resetProgressBtn = document.getElementById("reset-progress-btn");
+  DOM.resSearchInput = document.getElementById("resources-search-input");
+  DOM.resGridTarget = document.getElementById("resources-grid-target");
   DOM.helpBtn = document.getElementById("help-popover-btn");
   DOM.helpCard = document.getElementById("help-popover-card");
   DOM.helpCloseBtn = document.getElementById("help-popover-close");
