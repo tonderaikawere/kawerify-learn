@@ -931,3 +931,4 @@ function filterResourcesList() {
 // Custom accent color selection mapper settings selector functions
 // Event triggers updates for C++ select lists change lists
 // Event triggers updates for C# select lists change lists
+// Local storage system resets purge actions callbacks
