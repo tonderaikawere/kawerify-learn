@@ -356,3 +356,4 @@ curriculum.faq = [
 // Added C# integrated queries expressions parameters mapping.
 // Added C# files namespaces resolution addressing lessons.
 // Added C# interactive validation quizzes lists structures.
+// Lesson update: Added vectors sort exercises mapping examples.
