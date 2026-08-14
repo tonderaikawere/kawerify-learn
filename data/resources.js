@@ -49,3 +49,4 @@ if (typeof window !== 'undefined') {
 // Added freeCodeCamp React video course tutorial details metadata.
 // Added freeCodeCamp Python video course tutorial details metadata.
 // Added freeCodeCamp C++ video course tutorial details metadata.
+// Added freeCodeCamp C# video course tutorial details metadata.
