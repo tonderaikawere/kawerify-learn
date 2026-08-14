@@ -48,3 +48,4 @@ if (typeof window !== 'undefined') {
 // Added HTML CSS guidelines from MDN official specifications.
 // Added freeCodeCamp React video course tutorial details metadata.
 // Added freeCodeCamp Python video course tutorial details metadata.
+// Added freeCodeCamp C++ video course tutorial details metadata.
