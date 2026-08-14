@@ -27,3 +27,7 @@ const resources = {
     { name: 'Microsoft Learn .NET C#', url: 'https://learn.microsoft.com/en-us/dotnet/csharp/', desc: 'Official MS guide outlining namespaces, properties, and assemblies.' },
     { name: 'C# Programming Yellow Book', url: 'http://www.csharpyellowbook.com/', desc: 'Free detailed textbook mapping variables, lists, and GUI frameworks.' }
   ],
+  php: [
+    { name: 'PHP.net Official Manual', url: 'https://www.php.net/manual/en/', desc: 'Official documentation detailing superglobals, form actions, and SQL connectors.' },
+    { name: 'W3Schools PHP reference', url: 'https://www.w3schools.com/php/', desc: 'Quick reference containing syntax guides and standard forms.' }
+  ],
