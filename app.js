@@ -164,6 +164,7 @@ function switchTab(tab) {
     }
   });
   
+  if (tab === 'resources') renderResources();
   DOM.tabContents.forEach(content => {
     if (content.id === `tab-${tab}`) {
       content.classList.add("active");
