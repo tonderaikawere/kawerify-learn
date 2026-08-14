@@ -495,3 +495,4 @@ body.kid-mode .btn-action {
   --accent-cpp: #00599c;
   --accent-csharp: #178600;
 }
+body.kid-mode .resource-card { border-radius: var(--border-radius-kid); }
