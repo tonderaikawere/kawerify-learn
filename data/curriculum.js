@@ -352,3 +352,4 @@ curriculum.faq = [
 // Added C++ STL Vector collections details and kid-friendly analogy.
 // Added C++ classes hierarchical inheritance scope lessons.
 // Added C++ standard syntax review quizzes answers mapping.
+// Added C# encapsulation properties set get properties.
