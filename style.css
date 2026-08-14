@@ -511,3 +511,4 @@ body.cpp-theme { --accent-active: var(--accent-cpp); }
 body.csharp-theme { --accent-active: var(--accent-csharp); }
 #audio-toggle-checkbox { cursor: pointer; }
 #system-error-banner { background: #ef4444; color: white; padding: 12px; border-radius: 6px; }
+#hard-reset-all-btn:hover { text-decoration: underline; color: #b91c1c !important; }
