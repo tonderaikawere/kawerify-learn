@@ -481,3 +481,12 @@ body.kid-mode .btn-action {
   color: var(--text-active);
   margin-bottom: 10px;
 }
+.resource-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  margin-top: 15px;
+  color: var(--accent-blue);
+  text-decoration: none;
+  font-weight: 600;
+}
