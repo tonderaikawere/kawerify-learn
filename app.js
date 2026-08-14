@@ -928,3 +928,4 @@ function filterResourcesList() {
 // C# quiz question parser handler mapping checker utility function
 // Keyboard listener addition mapping for C++ resource keys
 // Keyboard listener addition mapping for C# resource keys
+// Custom accent color selection mapper settings selector functions
