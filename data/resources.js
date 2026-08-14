@@ -11,3 +11,7 @@ const resources = {
     { name: 'React Official Docs', url: 'https://react.dev', desc: 'Official React website outlining hooks and modern JSX rules.' },
     { name: 'Beta React docs', url: 'https://react.dev/reference/react', desc: 'Detailed component references and standard hook APIs.' }
   ],
+  python: [
+    { name: 'Python.org Documentation', url: 'https://docs.python.org/3/', desc: 'Official index for Python variables, standard libraries, and scopes.' },
+    { name: 'Real Python Tutorials', url: 'https://realpython.com', desc: 'Deep dive articles mapping web frameworks and CLI structures.' }
+  ],
