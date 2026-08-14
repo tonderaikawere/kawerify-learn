@@ -490,3 +490,4 @@ body.kid-mode .btn-action {
   text-decoration: none;
   font-weight: 600;
 }
+#resources-search-input { outline: none; border-color: var(--border-color); }
