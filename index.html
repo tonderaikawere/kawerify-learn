@@ -60,15 +60,24 @@
         <div class="tab-content active" id="tab-learn">
           <!-- Catalog View (Dashboard showing all courses, Alison-style) -->
           <div id="curriculum-catalog-view">
-            <!-- Achievements shelf / Badges row -->
+            <!-- Achievements shelf -->
             <div class="achievements-section">
               <h3 class="achievements-section-title">🏆 Achievements & Badges</h3>
               <div id="achievements-shelf" class="achievements-grid">
-                <!-- Badges rendered dynamically by app.js -->
+                <!-- Badges rendered dynamically -->
               </div>
             </div>
 
-            <div class="catalog-header-banner">
+            <!-- Coding Projects Catalog Shelf -->
+            <div class="achievements-section" style="margin-top:25px;">
+              <h3 class="achievements-section-title">📂 Interactive Coding Projects</h3>
+              <p style="color:var(--text-muted); font-size:0.9rem; margin-top:-10px; margin-bottom:15px;">Click any project to load its source code templates instantly into the Playground tab!</p>
+              <div id="projects-catalog-grid" class="projects-grid">
+                <!-- Projects rendered dynamically -->
+              </div>
+            </div>
+
+            <div class="catalog-header-banner" style="margin-top:25px;">
               <h2>Browse Free Online Coding Courses</h2>
               <p>Acquire coding skills step-by-step with interactive analogies and quizzes.</p>
               <div class="catalog-search-wrapper">
@@ -76,7 +85,7 @@
               </div>
             </div>
             <div id="course-catalog-grid" class="courses-grid">
-              <!-- Rendered dynamically by app.js -->
+              <!-- Rendered dynamically -->
             </div>
           </div>
 

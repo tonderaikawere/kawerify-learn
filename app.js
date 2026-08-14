@@ -279,15 +279,18 @@ function renderCurriculum() {
   if (!lang) return;
   
   const searchVal = DOM.lessonSearchInput ? DOM.lessonSearchInput.value.toLowerCase() : '';
+  const mascot = injectMascotSVG(langKey) || lang.mascotEmoji;
   
   let html = `
-    <div class="mascot-banner">
-      <div class="mascot-avatar">${lang.mascotEmoji}</div>
-      <div>
-        <h2 style="margin:0; color:${lang.color}">${lang.title} Lesson Space</h2>
-        <p style="margin:5px 0 0 0; color:var(--text-muted);">Hi! I'm <strong>${lang.mascot}</strong>, and I will help you learn today!</p>
-      </div>
-    </div>
+    <div class="course-player-grid">
+      <div class="course-player-lessons">
+        <div class="mascot-banner">
+          <div class="mascot-avatar">${mascot}</div>
+          <div>
+            <h2 style="margin:0; color:${lang.color}">${lang.title} Lesson Space</h2>
+            <p style="margin:5px 0 0 0; color:var(--text-muted);">Hi! I'm <strong>${lang.mascot}</strong>, and I will help you learn today!</p>
+          </div>
+        </div>
   `;
   
   // Progress Bar
@@ -346,6 +349,29 @@ function renderCurriculum() {
     </div>
   `;
   
+  // Close lessons column and open AI companion column
+  html += `
+      </div>
+      <div class="course-player-ai-companion">
+        <div class="ai-chat-header">
+          <div class="ai-avatar">🤖</div>
+          <div>
+            <span class="ai-name">Kawerify AI Companion</span>
+            <span class="ai-status">Online Assistant</span>
+          </div>
+        </div>
+        <div class="ai-chat-body" id="ai-chat-messages">
+          <div class="ai-message system">
+            Hi! I am your AI learning companion. Click the explanation button below to get an interactive layout breakdown!
+          </div>
+        </div>
+        <div class="ai-chat-footer">
+          <button class="ai-action-btn" onclick="askAiToExplainCurrentLesson('${langKey}')">💡 Explain Active Concepts</button>
+        </div>
+      </div>
+    </div>
+  `;
+  
   DOM.currViewTarget.innerHTML = html;
   renderQuiz();
 }
@@ -376,11 +402,12 @@ function renderCourseCatalog() {
       if (appState.completedLessons[`${langKey}_${i}`]) completed++;
     }
     const percent = totalLessons > 0 ? Math.round((completed / totalLessons) * 100) : 0;
+    const mascot = injectMascotSVG(langKey) || lang.mascotEmoji;
     
     html += `
       <div class="course-card" onclick="selectCourse('${langKey}')">
         <div class="course-card-header">
-          <span class="course-card-mascot" style="color:${lang.color}">${lang.mascotEmoji}</span>
+          <span class="course-card-mascot" style="color:${lang.color}">${mascot}</span>
           <span class="resource-badge" style="background-color:${lang.color}15; color:${lang.color}; border:1px solid ${lang.color}33; font-weight:bold; font-size:0.7rem; padding:4px 8px; border-radius:4px;">${langKey.toUpperCase()}</span>
         </div>
         <div>
@@ -408,6 +435,11 @@ function renderCourseCatalog() {
   }
   
   target.innerHTML = html;
+  
+  // Call projects catalog render
+  if (typeof renderProjectsCatalog === 'function') {
+    renderProjectsCatalog();
+  }
 }
 
 window.selectCourse = function(langKey) {
@@ -1277,4 +1309,116 @@ function playUnlockSound() {
       playNote(783.99, now + 0.24, 0.35); // G5
     } catch(e) {}
   }
+}
+
+// Custom Mascot SVGs Dictionary definitions
+const mascotSVGs = {
+  react: `<svg class="mascot-svg rotating" viewBox="0 0 100 100" width="60" height="60"><ellipse cx="50" cy="50" rx="8" ry="32" fill="none" stroke="#0ea5e9" stroke-width="2.5" transform="rotate(0 50 50)"/><ellipse cx="50" cy="50" rx="8" ry="32" fill="none" stroke="#0ea5e9" stroke-width="2.5" transform="rotate(60 50 50)"/><ellipse cx="50" cy="50" rx="8" ry="32" fill="none" stroke="#0ea5e9" stroke-width="2.5" transform="rotate(120 50 50)"/><circle cx="50" cy="50" r="5" fill="#38bdf8"/></svg>`,
+  python: `<svg class="mascot-svg wiggle" viewBox="0 0 100 100" width="60" height="60"><path d="M50 15 C35 15 30 25 30 35 C30 45 40 45 45 45 C50 45 50 55 50 60 C50 65 45 68 38 68 C30 68 25 62 25 58" fill="none" stroke="#38bdf8" stroke-width="7" stroke-linecap="round"/><path d="M50 85 C65 85 70 75 70 65 C70 55 60 55 55 55 C50 55 50 45 50 40 C50 35 55 32 62 32 C70 32 75 38 75 42" fill="none" stroke="#eab308" stroke-width="7" stroke-linecap="round"/><circle cx="38" cy="25" r="2" fill="white"/><circle cx="62" cy="75" r="2" fill="white"/></svg>`,
+  cpp: `<svg class="mascot-svg blink" viewBox="0 0 100 100" width="60" height="60"><rect x="25" y="30" width="50" height="40" rx="10" fill="#00599c" stroke="#38bdf8" stroke-width="3"/><rect x="35" y="70" width="10" height="15" fill="#00599c"/><rect x="55" y="70" width="10" height="15" fill="#00599c"/><line x1="50" y1="30" x2="50" y2="18" stroke="#38bdf8" stroke-width="3"/><circle cx="50" cy="18" r="4" fill="#eab308"/><circle class="robot-eye" cx="40" cy="50" r="4" fill="white"/><circle class="robot-eye" cx="60" cy="50" r="4" fill="white"/></svg>`,
+  csharp: `<svg class="mascot-svg float" viewBox="0 0 100 100" width="60" height="60"><polygon points="50,15 80,30 80,65 50,85 20,65 20,30" fill="#178600" stroke="#22c55e" stroke-width="3"/><text x="50" y="58" font-size="22" font-family="sans-serif" font-weight="900" fill="white" text-anchor="middle">C#</text></svg>`,
+  php: `<svg class="mascot-svg shake" viewBox="0 0 100 100" width="60" height="60"><ellipse cx="50" cy="50" rx="36" ry="22" fill="#4f46e5" stroke="#818cf8" stroke-width="3"/><text x="50" y="58" font-size="20" font-family="sans-serif" font-weight="bold" fill="white" text-anchor="middle">PHP</text></svg>`,
+  javascript: `<svg class="mascot-svg pulse" viewBox="0 0 100 100" width="60" height="60"><rect x="15" y="15" width="70" height="70" rx="8" fill="#eab308" stroke="#fef08a" stroke-width="2"/><text x="70" y="75" font-size="28" font-family="sans-serif" font-weight="900" fill="black" text-anchor="end">JS</text></svg>`,
+  html_css: `<svg class="mascot-svg tilt" viewBox="0 0 100 100" width="60" height="60"><polygon points="25,15 75,15 70,75 50,85 30,75" fill="#f97316" stroke="#fdba74" stroke-width="3"/><text x="50" y="55" font-size="24" font-family="sans-serif" font-weight="900" fill="white" text-anchor="middle">&lt;/&gt;</text></svg>`,
+  c: `<svg class="mascot-svg float" viewBox="0 0 100 100" width="60" height="60"><rect x="25" y="25" width="50" height="50" rx="5" fill="#64748b" stroke="#94a3b8" stroke-width="3"/><text x="50" y="58" font-size="28" font-family="sans-serif" font-weight="bold" fill="white" text-anchor="middle">C</text></svg>`
+};
+
+function injectMascotSVG(langKey) {
+  return mascotSVGs[langKey] || '';
+}
+
+// Pre-packaged Coding Projects Data
+const projectsList = [
+  { id: 'proj_react_card', lang: 'react', name: 'React Profile Card', desc: 'A premium customizable team profile dashboard.', icon: '⚛️' },
+  { id: 'proj_python_game', lang: 'python', name: 'Python Guessing Game', desc: 'Typewriter CLI game loop template.', icon: '🐍' },
+  { id: 'proj_js_flappy', lang: 'javascript', name: 'JS Flappy Bird Game', desc: 'Playable 2D arcade canvas game project.', icon: '🎮' },
+  { id: 'proj_cpp_vector', lang: 'cpp', name: 'C++ STL Vector Inventory', desc: 'A vector capacity sorting algorithm.', icon: '💻' },
+  { id: 'proj_csharp_linq', lang: 'csharp', name: 'C# LINQ Database Query', desc: 'Advanced student query listings analyzer.', icon: '⚡' },
+  { id: 'proj_html_landing', lang: 'html_css', name: 'Kawerify Landing Page', desc: 'Professional styled marketing showcase.', icon: '🌐' }
+];
+
+function renderProjectsCatalog() {
+  const target = document.getElementById("projects-catalog-grid");
+  if (!target) return;
+  
+  let html = '';
+  projectsList.forEach(proj => {
+    html += `
+      <div class="project-card" onclick="loadProjectIntoPlayground('${proj.id}')">
+        <div class="project-card-header">
+          <span class="project-card-icon">${proj.icon}</span>
+          <h4 class="project-card-title">${proj.name}</h4>
+        </div>
+        <p class="project-card-desc">${proj.desc}</p>
+        <button class="btn-project-load">Load Sandbox</button>
+      </div>
+    `;
+  });
+  target.innerHTML = html;
+}
+
+window.loadProjectIntoPlayground = function(projId) {
+  let code = '';
+  
+  if (projId === 'proj_react_card') {
+    code = `import React from 'react';\n\nexport default function ProfileCard() {\n  return (\n    <div style={{\n      border: '2px solid #0ea5e9',\n      borderRadius: '10px',\n      padding: '20px',\n      maxWidth: '300px',\n      backgroundColor: '#1e293b',\n      color: '#f8fafc',\n      fontFamily: 'sans-serif',\n      boxShadow: '0 4px 15px rgba(14,165,233,0.3)'\n    }}>\n      <h3 style={{ margin: '0 0 10px 0', color: '#0ea5e9' }}>Kawerify Developer</h3>\n      <p style={{ margin: '0 0 15px 0', fontStyle: 'italic' }}>Senior Software Architect</p>\n      <hr style={{ border: '0', borderTop: '1px solid #475569', margin: '10px 0' }} />\n      <span style={{ fontSize: '0.8rem', color: '#94a3b8' }}>Branded by kawerifytech.com</span>\n    </div>\n  );\n}`;
+  } else if (projId === 'proj_python_game') {
+    code = `import random\n\ndef play_guessing_game():\n    secret_number = random.randint(1, 10)\n    attempts = 3\n    print("Welcome to Kawerify Guessing Game!")\n    print("Guess a number between 1 and 10.")\n    for i in range(attempts):\n        guess = int(input(f"Attempt {i+1}: Enter guess: "))\n        if guess == secret_number:\n            print("🎉 Hooray! You guessed correctly!")\n            return True\n        elif guess < secret_number:\n            print("Too low!")\n        else:\n            print("Too high!")\n    print(f"Game over! The number was {secret_number}.")\n\nplay_guessing_game()`;
+  } else if (projId === 'proj_js_flappy') {
+    code = `<!DOCTYPE html>\n<html>\n<head>\n  <style>\n    body { margin: 0; background: #0f172a; display: flex; justify-content: center; align-items: center; height: 100vh; }\n    canvas { background: #38bdf8; border: 4px solid #0ea5e9; border-radius: 10px; }\n  </style>\n</head>\n<body>\n  <canvas id="gameCanvas" width="320" height="480"></canvas>\n  <script>\n    const canvas = document.getElementById("gameCanvas");\n    const ctx = canvas.getContext("2d");\n    let bird = { x: 50, y: 150, width: 20, height: 20, gravity: 0.5, velocity: 0, jump: -7 };\n    let pipes = [];\n    let score = 0;\n    let gameOver = false;\n    let frameCount = 0;\n    function spawnPipe() {\n      let gap = 120;\n      let topHeight = Math.floor(Math.random() * (canvas.height/3)) + 50;\n      pipes.push({ x: canvas.width, top: topHeight, bottom: topHeight + gap, width: 40 });\n    }\n    function draw() {\n      ctx.clearRect(0, 0, canvas.width, canvas.height);\n      ctx.fillStyle = "#facc15";\n      ctx.fillRect(bird.x, bird.y, bird.width, bird.height);\n      ctx.fillStyle = "#22c55e";\n      pipes.forEach(p => {\n        ctx.fillRect(p.x, 0, p.width, p.top);\n        ctx.fillRect(p.x, p.bottom, p.width, canvas.height - p.bottom);\n      });\n      ctx.fillStyle = "white";\n      ctx.font = "bold 20px Arial";\n      ctx.fillText("Score: " + score, 15, 35);\n      if (gameOver) {\n        ctx.fillStyle = "rgba(0,0,0,0.6)";\n        ctx.fillRect(0,0,canvas.width,canvas.height);\n        ctx.fillStyle = "white";\n        ctx.font = "bold 28px Arial";\n        ctx.fillText("Game Over", 85, 230);\n        ctx.font = "14px Arial";\n        ctx.fillText("Press Space or Click to Restart", 65, 270);\n      }\n    }\n    function update() {\n      if (gameOver) return;\n      bird.velocity += bird.gravity;\n      bird.y += bird.velocity;\n      if (bird.y + bird.height > canvas.height || bird.y < 0) gameOver = true;\n      pipes.forEach(p => {\n        p.x -= 2;\n        if (bird.x + bird.width > p.x && bird.x < p.x + p.width) {\n          if (bird.y < p.top || bird.y + bird.height > p.bottom) gameOver = true;\n        }\n        if (p.x + p.width === bird.x) score++;\n      });\n      pipes = pipes.filter(p => p.x > -p.width);\n      if (frameCount % 90 === 0) spawnPipe();\n      frameCount++;\n    }\n    function loop() {\n      update();\n      draw();\n      requestAnimationFrame(loop);\n    }\n    function reset() {\n      bird.y = 150; bird.velocity = 0; pipes = []; score = 0; gameOver = false; frameCount = 0; spawnPipe();\n    }\n    window.addEventListener("keydown", (e) => {\n      if (e.code === "Space") { if (gameOver) reset(); else bird.velocity = bird.jump; }\n    });\n    canvas.addEventListener("click", () => {\n      if (gameOver) reset(); else bird.velocity = bird.jump;\n    });\n    spawnPipe();\n    loop();\n  </script>\n</body>\n</html>`;
+  } else if (projId === 'proj_cpp_vector') {
+    code = `#include <iostream>\n#include <vector>\n\nint main() {\n    std::vector<int> numbers = { 10, 20, 30 };\n    std::cout << "Packing magic backpack...\\n";\n    std::cout << "Items list: ";\n    for (int num : numbers) {\n        std::cout << num << " ";\n    }\n    std::cout << "\\nFinished processing!\\n";\n    return 0;\n}`;
+  } else if (projId === 'proj_csharp_linq') {
+    code = `using System;\nusing System.Linq;\nusing System.Collections.Generic;\n\nclass Program {\n    static void Main() {\n        List<int> numbers = new List<int> { 5, 12, 19, 26 };\n        Console.WriteLine("LINQ magic wand searching...");\n        var query = numbers.Where(n => n > 15);\n        foreach (var val in query) {\n            Console.WriteLine("Filtered item: " + val);\n        }\n    }\n}`;
+  } else if (projId === 'proj_html_landing') {
+    code = `<!-- HTML -->\n<div class="banner">\n  <h1>Kawerify Tech Showcase</h1>\n  <p>Building premium digital products for a global audience.</p>\n  <a href="https://kawerifytech.com" target="_blank" class="cta-btn">Explore Our Services</a>\n</div>\n\n<style>\nbody { margin:0; font-family:sans-serif; background:#0f172a; color:white; }\n.banner { display:flex; flex-direction:column; align-items:center; justify-content:center; height:100vh; text-align:center; padding:20px; }\nh1 { font-size:3rem; color:#0ea5e9; margin-bottom:10px; }\np { font-size:1.2rem; color:#94a3b8; margin-bottom:30px; }\n.cta-btn { background:#0ea5e9; color:white; padding:12px 24px; text-decoration:none; border-radius:30px; font-weight:bold; box-shadow:0 4px 15px rgba(14,165,233,0.4); }\n</style>`;
+  }
+  
+  if (DOM.playCodeEditor) {
+    DOM.playCodeEditor.value = code;
+    switchTab("playground");
+    runPlaygroundCode();
+    showSystemNotification("📂 Project loaded into Sandbox!");
+    if (typeof unlockBadge === 'function') {
+      unlockBadge('sandbox_hero');
+    }
+  }
+}
+
+window.askAiToExplainCurrentLesson = function(langKey) {
+  const messages = document.getElementById("ai-chat-messages");
+  if (!messages) return;
+  
+  const userDiv = document.createElement("div");
+  userDiv.className = "ai-message user";
+  userDiv.innerText = "Please explain the core concepts of " + langKey.toUpperCase() + " in detail.";
+  messages.appendChild(userDiv);
+  messages.scrollTop = messages.scrollHeight;
+  
+  playClickSound();
+  
+  setTimeout(() => {
+    const botDiv = document.createElement("div");
+    botDiv.className = "ai-message bot";
+    botDiv.innerText = "🔍 Accessing Kawerify Knowledge Engine...";
+    messages.appendChild(botDiv);
+    messages.scrollTop = messages.scrollHeight;
+    
+    setTimeout(() => {
+      let resp = '';
+      if (langKey === 'react') {
+        resp = "⚛️ React components act like modular Lego blocks. They use State (internal data trackers) and Props (inputs received from parent blocks). \\n\\nIn Kid Mode, we compare it to a toy assembly line where each worker handles one part. In Dev Mode, it maps virtual DOM rendering trees.";
+      } else if (langKey === 'python') {
+        resp = "🐍 Python is a human-readable language focused on developer speed. It uses indentation to denote code blocks instead of curly brackets.\\n\\nIn Kid Mode, we compare its variables to labeled drawers in a cupboard. In Dev Mode, they are object references in dynamic scopes.";
+      } else if (langKey === 'cpp' || langKey === 'c' || langKey === 'csharp') {
+        resp = `💻 ${langKey.toUpperCase()} is a compiled C-family language. It uses strict typings, memory address structures, and compiler namespaces.\\n\\nAnalogy: Like cataloging postal addresses in folders to ensure zero shipping errors.`;
+      } else {
+        resp = `🌐 ${langKey.toUpperCase()} is a fundamental building block of web apps. It governs styles, data transfers, and server integrations.\\n\\nAnalogy: Like designing blueprint diagrams for a construction project.`;
+      }
+      
+      botDiv.innerHTML = resp.replace(/\\n/g, '<br>');
+      messages.scrollTop = messages.scrollHeight;
+      playClickSound();
+    }, 1000);
+  }, 600);
 }
