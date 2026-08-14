@@ -307,3 +307,4 @@ curriculum.faq = [
   { q: 'Is this platform really free?', a: 'Yes! It is completely free with no restrictions.' }
 ];
 // Added C++ specific OOP learning curriculum module descriptions.
+// Added C++ STL Vector collections details and kid-friendly analogy.
