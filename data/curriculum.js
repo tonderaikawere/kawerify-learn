@@ -303,6 +303,48 @@ curriculum.cpp = {
     },
 };
 
+curriculum.csharp = {
+    csharp: {
+        title: "C# Language",
+        mascot: "Penny CSharp",
+        mascotEmoji: "✨",
+        color: "var(--accent-csharp, #178600)",
+        lessons: [
+            {
+                title: "Properties & Accessors",
+                kid: "C# variables can have locks on them! Instead of letting anyone touch your toy box, you use **Properties** with getters (`get`) and setters (`set`) to decide who is allowed to peek inside or change things.",
+                dev: "C# properties provide a flexible mechanism to read, write, or compute the value of a private field. They encapsulate fields using `get` and `set` accessors containing validation logic."
+            },
+            {
+                title: "LINQ (The Sorting Wand)",
+                kid: "Imagine a messy room full of toys. **LINQ** is like a magic wand! You say 'select all green toys' and *poof!* they line up neatly. In code, you write `from toy in room where toy.color == 'green' select toy`!",
+                dev: "Language Integrated Query (LINQ) is a set of technologies that integrates query capabilities directly into C#. It allows querying collections, databases, or XML structures using unified syntax."
+            },
+            {
+                title: "Namespaces (Postal Boxes)",
+                kid: "If two kids in school are named Alex, it gets confusing! C# uses **Namespaces** to sort things. One Alex is in `Classrooms.RoomA.Alex` and the other is in `Classrooms.RoomB.Alex`. Neat and organized!",
+                dev: "Namespaces are used to organize code and prevent naming collisions. They group classes, interfaces, and other namespaces, resolved using the `using` directive."
+            }
+        ],
+        quizzes: [
+            {
+                q: "What does LINQ stand for in C#?",
+                a: ["Language Integrated Query", "Logical Input Network Queue", "Linear Interactive Node Quest"],
+                correct: 0,
+                kidFeedback: "Super! LINQ is your magic query wand!",
+                devFeedback: "Correct. LINQ allows SQL-like querying directly on C# objects and data collections."
+            },
+            {
+                q: "What accessors do Properties use?",
+                a: ["read / write", "get / set", "input / output"],
+                correct: 1,
+                kidFeedback: "Perfect! You use get and set to lock and peek into properties!",
+                devFeedback: "Correct. Properties use `get` accessors to retrieve values and `set` accessors to assign them."
+            }
+        ]
+    },
+};
+
 curriculum.faq = [
   { q: 'Is this platform really free?', a: 'Yes! It is completely free with no restrictions.' }
 ];
